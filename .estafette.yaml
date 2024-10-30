@@ -1,0 +1,112 @@
+builder:
+  track: dev
+
+labels:
+  type: service
+  app-group: estafette-ci
+  team: estafette
+  language: golang
+
+version:
+  semver:
+    major: 1
+    minor: 5
+    patch: 5
+
+triggers:
+- name: migrator
+  pipeline:
+    name: github.com/estafette/estafette-ci-db-migrator
+    branch: main
+  builds:
+    branch: main
+
+stages:
+  continues-integration:
+    parallelStages:
+      ci-api:
+        image: estafette/estafette-ci-api-cache
+        env:
+          CGO_ENABLED: 0
+          GOGC: off
+          GOOS: linux
+        commands:
+          - golangci-lint run --timeout 3m
+          - CGO_ENABLED=1 go test -short -race ./...
+          - go build -ldflags "-X main.appgroup=${ESTAFETTE_LABEL_APP_GROUP} -X main.app=${ESTAFETTE_GIT_NAME} -X main.version=${ESTAFETTE_BUILD_VERSION} -X main.revision=${ESTAFETTE_GIT_REVISION} -X main.branch=${ESTAFETTE_GIT_BRANCH} -X main.buildDate=${ESTAFETTE_BUILD_DATETIME}" -o ./publish/${ESTAFETTE_GIT_NAME} .
+      gcs-migrator:
+        image: estafette/gcs-migrator-base
+        commands:
+          - cd gcs-migrator
+          - pyinstaller --strip -F -n gcs-migrator server.py
+          - mkdir -p ../publish
+          - staticx --strip dist/gcs-migrator ../publish/gcs-migrator
+
+  integration-tests/db-migrator:
+    services:
+    - name: cockroachdb
+      multiStage: true
+      image: cockroachdb/cockroach:v21.1.8
+      env:
+        COCKROACH_SKIP_ENABLING_DIAGNOSTIC_REPORTING: "true"
+      readinessProbe:
+        httpGet:
+          path: /health?ready=1
+          port: 8080
+        timeoutSeconds: 120
+      commands:
+      - /cockroach/cockroach start-single-node --insecure --advertise-addr estafette-ci-db-public
+    image: estafette/estafette-ci-db-migrator:${ESTAFETTE_TRIGGER_MIGRATOR_BUILD_VERSION}
+    env:
+      DB_HOST: cockroachdb
+      DB_DATABASE: defaultdb
+      DB_INSECURE: true
+      DB_PORT: 26257
+      DB_USER: root
+      DB_PASSWORD: ''
+      ESTAFETTE_LOG_FORMAT: console
+
+  integration-tests/db-integration:
+    image: estafette/estafette-ci-api-cache
+    env:
+      GOGC: off
+      DB_HOST: cockroachdb
+      DB_DATABASE: defaultdb
+      DB_INSECURE: true
+      DB_PORT: 26257
+      DB_USER: root
+      DB_PASSWORD: ''
+    commands:
+    - go test -run TestIntegration ./...
+
+  bake:
+    image: extensions/docker:dev
+    action: build
+    severity: unknown
+    repositories:
+    - estafette
+    path: .
+    copy:
+    - /etc/ssl/certs/ca-certificates.crt
+
+  push-to-docker-hub:
+    image: extensions/docker:dev
+    action: push
+    repositories:
+    - estafette
+
+  tag-revision:
+    image: bitnami/git
+    commands:
+    - git tag ${ESTAFETTE_BUILD_VERSION}
+    - git push origin ${ESTAFETTE_BUILD_VERSION}
+    when: status == 'succeeded' &&
+      branch == 'main'
+
+  slack-notify:
+    image: extensions/slack-build-status:dev
+    workspace: estafette
+    channels:
+    - '#build-status'
+    when: status == 'succeeded' ||
+      status == 'failed'
