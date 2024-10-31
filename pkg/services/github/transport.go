@@ -5,18 +5,19 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/estafette/estafette-ci-api/pkg/clients/database"
-	"github.com/estafette/migration"
 	"io"
 	"net/http"
 	"strings"
 
-	"github.com/estafette/estafette-ci-api/pkg/api"
-	"github.com/estafette/estafette-ci-api/pkg/clients/githubapi"
-	manifest "github.com/estafette/estafette-ci-manifest"
+	"github.com/estafette/migration"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/clients/database"
+
 	"github.com/gin-gonic/gin"
 	"github.com/opentracing/opentracing-go"
 	"github.com/rs/zerolog/log"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/api"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/clients/githubapi"
+	manifest "github.com/ziplineeci/ziplinee-ci-manifest"
 )
 
 func NewHandler(service Service, config *api.APIConfig, githubapiClient githubapi.Client, databaseClient database.Client) Handler {

@@ -13,14 +13,14 @@ import (
 	"time"
 
 	sq "github.com/Masterminds/squirrel"
-	"github.com/estafette/estafette-ci-api/pkg/api"
-	"github.com/estafette/estafette-ci-api/pkg/clients/database/queries"
-	contracts "github.com/estafette/estafette-ci-contracts"
-	manifest "github.com/estafette/estafette-ci-manifest"
-	foundation "github.com/estafette/estafette-foundation"
 	_ "github.com/lib/pq" // use postgres client library to connect to cockroachdb
 	"github.com/opentracing/opentracing-go"
 	"github.com/rs/zerolog/log"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/api"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/clients/database/queries"
+	contracts "github.com/ziplineeci/ziplinee-ci-contracts"
+	manifest "github.com/ziplineeci/ziplinee-ci-manifest"
+	foundation "github.com/ziplineeci/ziplinee-foundation"
 	"gopkg.in/yaml.v2"
 )
 

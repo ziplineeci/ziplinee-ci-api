@@ -7,8 +7,8 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/estafette/estafette-ci-api/pkg/api"
 	"github.com/stretchr/testify/assert"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/api"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
 	"google.golang.org/api/option"

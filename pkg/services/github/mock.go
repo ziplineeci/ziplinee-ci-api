@@ -8,9 +8,9 @@ import (
 	context "context"
 	reflect "reflect"
 
-	githubapi "github.com/estafette/estafette-ci-api/pkg/clients/githubapi"
-	contracts "github.com/estafette/estafette-ci-contracts"
-	manifest "github.com/estafette/estafette-ci-manifest"
+	githubapi "github.com/ziplineeci/ziplinee-ci-api/pkg/clients/githubapi"
+	contracts "github.com/ziplineeci/ziplinee-ci-contracts"
+	manifest "github.com/ziplineeci/ziplinee-ci-manifest"
 	gomock "github.com/golang/mock/gomock"
 )
 

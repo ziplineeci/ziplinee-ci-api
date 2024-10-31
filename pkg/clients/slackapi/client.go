@@ -8,10 +8,10 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/estafette/estafette-ci-api/pkg/api"
 	"github.com/opentracing-contrib/go-stdlib/nethttp"
 	"github.com/opentracing/opentracing-go"
 	"github.com/sethgrid/pester"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/api"
 )
 
 // Client is the interface for communicating with the Slack api

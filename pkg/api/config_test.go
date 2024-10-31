@@ -6,10 +6,10 @@ import (
 	"os"
 	"testing"
 
-	contracts "github.com/estafette/estafette-ci-contracts"
-	crypt "github.com/estafette/estafette-ci-crypt"
-	manifest "github.com/estafette/estafette-ci-manifest"
 	"github.com/stretchr/testify/assert"
+	contracts "github.com/ziplineeci/ziplinee-ci-contracts"
+	crypt "github.com/ziplineeci/ziplinee-ci-crypt"
+	manifest "github.com/ziplineeci/ziplinee-ci-manifest"
 	v1 "k8s.io/api/core/v1"
 )
 

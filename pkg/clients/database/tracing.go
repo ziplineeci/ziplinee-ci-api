@@ -4,10 +4,10 @@ import (
 	"context"
 	"time"
 
-	"github.com/estafette/estafette-ci-api/pkg/api"
-	contracts "github.com/estafette/estafette-ci-contracts"
-	manifest "github.com/estafette/estafette-ci-manifest"
 	"github.com/opentracing/opentracing-go"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/api"
+	contracts "github.com/ziplineeci/ziplinee-ci-contracts"
+	manifest "github.com/ziplineeci/ziplinee-ci-manifest"
 )
 
 // NewTracingClient returns a new instance of a tracing Client.

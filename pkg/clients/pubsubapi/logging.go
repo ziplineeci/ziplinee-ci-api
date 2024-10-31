@@ -3,8 +3,8 @@ package pubsubapi
 import (
 	"context"
 
-	"github.com/estafette/estafette-ci-api/pkg/api"
-	manifest "github.com/estafette/estafette-ci-manifest"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/api"
+	manifest "github.com/ziplineeci/ziplinee-ci-manifest"
 )
 
 // NewLoggingClient returns a new instance of a logging Client.

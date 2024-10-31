@@ -5,8 +5,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	crypt "github.com/estafette/estafette-ci-crypt"
 	"github.com/rs/zerolog/log"
+	crypt "github.com/ziplineeci/ziplinee-ci-crypt"
 	"gopkg.in/yaml.v2"
 )
 

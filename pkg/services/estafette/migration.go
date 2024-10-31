@@ -5,16 +5,17 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"google.golang.org/grpc"
-	"k8s.io/utils/ptr"
 	"sync/atomic"
 	"time"
+
+	"google.golang.org/grpc"
+	"k8s.io/utils/ptr"
 
 	"github.com/rs/zerolog/log"
 	"google.golang.org/grpc/metadata"
 
-	"github.com/estafette/estafette-ci-api/pkg/migrationpb"
 	"github.com/estafette/migration"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/migrationpb"
 )
 
 const (

@@ -8,9 +8,9 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/rs/zerolog/log"
 
-	"github.com/estafette/estafette-ci-api/pkg/api"
-	"github.com/estafette/estafette-ci-api/pkg/clients/database"
 	"github.com/estafette/migration"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/api"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/clients/database"
 )
 
 func (h *Handler) QueueMigration(c *gin.Context) {

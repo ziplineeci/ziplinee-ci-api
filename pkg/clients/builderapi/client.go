@@ -24,13 +24,13 @@ import (
 	"k8s.io/apimachinery/pkg/watch"
 	"k8s.io/client-go/kubernetes"
 
-	"github.com/estafette/estafette-ci-api/pkg/api"
-	"github.com/estafette/estafette-ci-api/pkg/clients/dockerhubapi"
-	contracts "github.com/estafette/estafette-ci-contracts"
-	crypt "github.com/estafette/estafette-ci-crypt"
-	manifest "github.com/estafette/estafette-ci-manifest"
-	foundation "github.com/estafette/estafette-foundation"
 	"github.com/rs/zerolog/log"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/api"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/clients/dockerhubapi"
+	contracts "github.com/ziplineeci/ziplinee-ci-contracts"
+	crypt "github.com/ziplineeci/ziplinee-ci-crypt"
+	manifest "github.com/ziplineeci/ziplinee-ci-manifest"
+	foundation "github.com/ziplineeci/ziplinee-foundation"
 )
 
 var (
@@ -129,7 +129,7 @@ func (c *client) CreateCiBuilderJob(ctx context.Context, ciBuilderParams CiBuild
 	}
 
 	// other job config
-	repository := "estafette/estafette-ci-builder"
+	repository := "ziplineeci/ziplinee-ci-builder"
 	tag := *ciBuilderParams.BuilderConfig.Track
 	image := fmt.Sprintf("%v:%v", repository, tag)
 	imagePullPolicy := v1.PullAlways

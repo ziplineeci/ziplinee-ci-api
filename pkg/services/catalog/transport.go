@@ -4,11 +4,11 @@ import (
 	"net/http"
 	"sort"
 
-	"github.com/estafette/estafette-ci-api/pkg/api"
-	"github.com/estafette/estafette-ci-api/pkg/clients/database"
-	contracts "github.com/estafette/estafette-ci-contracts"
 	"github.com/gin-gonic/gin"
 	"github.com/rs/zerolog/log"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/api"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/clients/database"
+	contracts "github.com/ziplineeci/ziplinee-ci-contracts"
 )
 
 // NewHandler returns a new rbac.Handler

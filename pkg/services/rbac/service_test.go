@@ -3,8 +3,8 @@ package rbac
 import (
 	"testing"
 
-	contracts "github.com/estafette/estafette-ci-contracts"
 	"github.com/stretchr/testify/assert"
+	contracts "github.com/ziplineeci/ziplinee-ci-contracts"
 )
 
 func TestDedupeRoles(t *testing.T) {

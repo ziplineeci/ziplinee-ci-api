@@ -1,7 +1,7 @@
 package bitbucket
 
 import (
-	"github.com/estafette/estafette-ci-api/pkg/clients/bitbucketapi"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/clients/bitbucketapi"
 )
 
 // isBuildBlocked check if repository is blocked from builds

@@ -3,7 +3,7 @@ package cloudsourceapi
 import (
 	"context"
 
-	"github.com/estafette/estafette-ci-api/pkg/api"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/api"
 )
 
 // NewLoggingClient returns a new instance of a logging Client.

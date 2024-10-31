@@ -3,9 +3,9 @@ package api
 import (
 	"testing"
 
-	crypt "github.com/estafette/estafette-ci-crypt"
-	manifest "github.com/estafette/estafette-ci-manifest"
 	"github.com/stretchr/testify/assert"
+	crypt "github.com/ziplineeci/ziplinee-ci-crypt"
+	manifest "github.com/ziplineeci/ziplinee-ci-manifest"
 )
 
 var (

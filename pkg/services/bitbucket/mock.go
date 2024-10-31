@@ -8,9 +8,9 @@ import (
 	context "context"
 	reflect "reflect"
 
-	bitbucketapi "github.com/estafette/estafette-ci-api/pkg/clients/bitbucketapi"
-	contracts "github.com/estafette/estafette-ci-contracts"
-	manifest "github.com/estafette/estafette-ci-manifest"
+	bitbucketapi "github.com/ziplineeci/ziplinee-ci-api/pkg/clients/bitbucketapi"
+	contracts "github.com/ziplineeci/ziplinee-ci-contracts"
+	manifest "github.com/ziplineeci/ziplinee-ci-manifest"
 	gomock "github.com/golang/mock/gomock"
 )
 

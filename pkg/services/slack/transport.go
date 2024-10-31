@@ -5,15 +5,15 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/estafette/estafette-ci-api/pkg/api"
-	"github.com/estafette/estafette-ci-api/pkg/clients/database"
-	"github.com/estafette/estafette-ci-api/pkg/clients/slackapi"
-	"github.com/estafette/estafette-ci-api/pkg/services/estafette"
-	contracts "github.com/estafette/estafette-ci-contracts"
-	crypt "github.com/estafette/estafette-ci-crypt"
-	manifest "github.com/estafette/estafette-ci-manifest"
 	"github.com/gin-gonic/gin"
 	"github.com/rs/zerolog/log"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/api"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/clients/database"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/clients/slackapi"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/services/estafette"
+	contracts "github.com/ziplineeci/ziplinee-ci-contracts"
+	crypt "github.com/ziplineeci/ziplinee-ci-crypt"
+	manifest "github.com/ziplineeci/ziplinee-ci-manifest"
 )
 
 // NewHandler returns a pubsub.Handler

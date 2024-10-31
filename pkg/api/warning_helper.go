@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"strings"
 
-	contracts "github.com/estafette/estafette-ci-contracts"
-	crypt "github.com/estafette/estafette-ci-crypt"
-	manifest "github.com/estafette/estafette-ci-manifest"
+	contracts "github.com/ziplineeci/ziplinee-ci-contracts"
+	crypt "github.com/ziplineeci/ziplinee-ci-crypt"
+	manifest "github.com/ziplineeci/ziplinee-ci-manifest"
 )
 
 // WarningHelper checks whether any warnings should be issued

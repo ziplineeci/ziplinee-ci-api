@@ -1,31 +1,32 @@
 package main
 
 import (
-	"github.com/estafette/estafette-ci-api/pkg/migrationpb"
 	"testing"
 
-	"github.com/estafette/estafette-ci-api/pkg/api"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/migrationpb"
+
 	"github.com/golang/mock/gomock"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/api"
 
-	"github.com/estafette/estafette-ci-api/pkg/clients/bitbucketapi"
-	"github.com/estafette/estafette-ci-api/pkg/clients/builderapi"
-	"github.com/estafette/estafette-ci-api/pkg/clients/cloudsourceapi"
-	"github.com/estafette/estafette-ci-api/pkg/clients/cloudstorage"
-	"github.com/estafette/estafette-ci-api/pkg/clients/database"
-	"github.com/estafette/estafette-ci-api/pkg/clients/githubapi"
-	"github.com/estafette/estafette-ci-api/pkg/clients/pubsubapi"
-	"github.com/estafette/estafette-ci-api/pkg/clients/slackapi"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/clients/bitbucketapi"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/clients/builderapi"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/clients/cloudsourceapi"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/clients/cloudstorage"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/clients/database"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/clients/githubapi"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/clients/pubsubapi"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/clients/slackapi"
 
-	"github.com/estafette/estafette-ci-api/pkg/services/bitbucket"
-	"github.com/estafette/estafette-ci-api/pkg/services/catalog"
-	"github.com/estafette/estafette-ci-api/pkg/services/cloudsource"
-	"github.com/estafette/estafette-ci-api/pkg/services/estafette"
-	"github.com/estafette/estafette-ci-api/pkg/services/github"
-	"github.com/estafette/estafette-ci-api/pkg/services/pubsub"
-	"github.com/estafette/estafette-ci-api/pkg/services/rbac"
-	"github.com/estafette/estafette-ci-api/pkg/services/slack"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/services/bitbucket"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/services/catalog"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/services/cloudsource"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/services/estafette"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/services/github"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/services/pubsub"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/services/rbac"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/services/slack"
 
-	crypt "github.com/estafette/estafette-ci-crypt"
+	crypt "github.com/ziplineeci/ziplinee-ci-crypt"
 )
 
 func TestConfigureGinGonic(t *testing.T) {

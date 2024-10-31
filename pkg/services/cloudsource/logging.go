@@ -3,9 +3,9 @@ package cloudsource
 import (
 	"context"
 
-	"github.com/estafette/estafette-ci-api/pkg/api"
-	"github.com/estafette/estafette-ci-api/pkg/clients/cloudsourceapi"
-	contracts "github.com/estafette/estafette-ci-contracts"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/api"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/clients/cloudsourceapi"
+	contracts "github.com/ziplineeci/ziplinee-ci-contracts"
 )
 
 // NewLoggingService returns a new instance of a logging Service.

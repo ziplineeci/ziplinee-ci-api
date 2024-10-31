@@ -5,18 +5,19 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
-	"k8s.io/utils/ptr"
 	"os"
 	"time"
 
-	"github.com/estafette/estafette-ci-api/pkg/api"
-	"github.com/estafette/estafette-ci-api/pkg/clients/database/queries"
-	contracts "github.com/estafette/estafette-ci-contracts"
+	"k8s.io/utils/ptr"
+
 	"github.com/estafette/migration"
 	"github.com/google/uuid"
 	"github.com/lib/pq"
 	"github.com/opentracing/opentracing-go"
 	"github.com/rs/zerolog/log"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/api"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/clients/database/queries"
+	contracts "github.com/ziplineeci/ziplinee-ci-contracts"
 )
 
 var (

@@ -4,10 +4,10 @@ import (
 	"context"
 	"testing"
 
-	"github.com/estafette/estafette-ci-api/pkg/api"
-	contracts "github.com/estafette/estafette-ci-contracts"
-	manifest "github.com/estafette/estafette-ci-manifest"
 	"github.com/stretchr/testify/assert"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/api"
+	contracts "github.com/ziplineeci/ziplinee-ci-contracts"
+	manifest "github.com/ziplineeci/ziplinee-ci-manifest"
 	v1 "k8s.io/api/core/v1"
 )
 

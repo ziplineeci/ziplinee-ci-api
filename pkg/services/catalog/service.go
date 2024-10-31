@@ -3,9 +3,9 @@ package catalog
 import (
 	"context"
 
-	"github.com/estafette/estafette-ci-api/pkg/api"
-	"github.com/estafette/estafette-ci-api/pkg/clients/database"
-	contracts "github.com/estafette/estafette-ci-contracts"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/api"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/clients/database"
+	contracts "github.com/ziplineeci/ziplinee-ci-contracts"
 )
 
 // Service handles http requests for role-based-access-control

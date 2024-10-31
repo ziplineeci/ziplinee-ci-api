@@ -9,9 +9,9 @@ import (
 	reflect "reflect"
 	time "time"
 
-	api "github.com/estafette/estafette-ci-api/pkg/api"
-	estafette_ci_contracts "github.com/estafette/estafette-ci-contracts"
-	estafette_ci_manifest "github.com/estafette/estafette-ci-manifest"
+	api "github.com/ziplineeci/ziplinee-ci-api/pkg/api"
+	estafette_ci_contracts "github.com/ziplineeci/ziplinee-ci-contracts"
+	estafette_ci_manifest "github.com/ziplineeci/ziplinee-ci-manifest"
 	migration "github.com/estafette/migration"
 	gomock "github.com/golang/mock/gomock"
 )

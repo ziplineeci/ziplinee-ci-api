@@ -3,7 +3,7 @@ package bigquery
 import (
 	"context"
 
-	"github.com/estafette/estafette-ci-api/pkg/api"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/api"
 )
 
 func NewLoggingClient(c Client) Client {

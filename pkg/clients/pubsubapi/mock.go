@@ -8,7 +8,7 @@ import (
 	context "context"
 	reflect "reflect"
 
-	estafette_ci_manifest "github.com/estafette/estafette-ci-manifest"
+	estafette_ci_manifest "github.com/ziplineeci/ziplinee-ci-manifest"
 	gomock "github.com/golang/mock/gomock"
 )
 

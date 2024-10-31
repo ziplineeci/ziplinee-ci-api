@@ -6,12 +6,12 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/estafette/estafette-ci-api/pkg/api"
-	"github.com/estafette/estafette-ci-api/pkg/clients/database"
-	contracts "github.com/estafette/estafette-ci-contracts"
 	"github.com/google/uuid"
 	"github.com/rs/zerolog/log"
 	"github.com/sethvargo/go-password/password"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/api"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/clients/database"
+	contracts "github.com/ziplineeci/ziplinee-ci-contracts"
 )
 
 var (

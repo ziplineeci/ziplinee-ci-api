@@ -8,7 +8,7 @@ import (
 	context "context"
 	reflect "reflect"
 
-	estafette_ci_contracts "github.com/estafette/estafette-ci-contracts"
+	estafette_ci_contracts "github.com/ziplineeci/ziplinee-ci-contracts"
 	gomock "github.com/golang/mock/gomock"
 	v1 "k8s.io/api/batch/v1"
 )

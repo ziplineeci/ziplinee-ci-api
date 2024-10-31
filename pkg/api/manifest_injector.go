@@ -5,8 +5,8 @@ import (
 	"regexp"
 	"strings"
 
-	manifest "github.com/estafette/estafette-ci-manifest"
 	"github.com/rs/zerolog/log"
+	manifest "github.com/ziplineeci/ziplinee-ci-manifest"
 )
 
 // InjectStages injects some mandatory and configured stages

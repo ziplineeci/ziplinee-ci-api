@@ -10,10 +10,10 @@ import (
 	"net/url"
 	"strconv"
 
-	"github.com/estafette/estafette-ci-api/pkg/api"
-	foundation "github.com/estafette/estafette-foundation"
 	"github.com/rs/zerolog/log"
 	"github.com/sethgrid/pester"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/api"
+	foundation "github.com/ziplineeci/ziplinee-foundation"
 )
 
 // Client is the interface for communicating with prometheus

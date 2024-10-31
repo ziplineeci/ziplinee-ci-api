@@ -12,11 +12,11 @@ import (
 	"strings"
 
 	"cloud.google.com/go/storage"
-	"github.com/estafette/estafette-ci-api/pkg/api"
-	"github.com/estafette/estafette-ci-api/pkg/pool"
-	contracts "github.com/estafette/estafette-ci-contracts"
-	foundation "github.com/estafette/estafette-foundation"
 	"github.com/rs/zerolog/log"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/api"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/pool"
+	contracts "github.com/ziplineeci/ziplinee-ci-contracts"
+	foundation "github.com/ziplineeci/ziplinee-foundation"
 	"google.golang.org/api/iterator"
 )
 

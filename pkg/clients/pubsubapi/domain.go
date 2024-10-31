@@ -4,7 +4,7 @@ import (
 	"encoding/base64"
 	"strings"
 
-	manifest "github.com/estafette/estafette-ci-manifest"
+	manifest "github.com/ziplineeci/ziplinee-ci-manifest"
 )
 
 // PubSubPushMessage is a container for a pubsub push message

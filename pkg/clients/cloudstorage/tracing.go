@@ -4,9 +4,9 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/estafette/estafette-ci-api/pkg/api"
-	contracts "github.com/estafette/estafette-ci-contracts"
 	"github.com/opentracing/opentracing-go"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/api"
+	contracts "github.com/ziplineeci/ziplinee-ci-contracts"
 )
 
 // NewTracingClient returns a new instance of a tracing Client.

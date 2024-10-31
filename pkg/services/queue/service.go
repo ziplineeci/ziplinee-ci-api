@@ -4,12 +4,12 @@ import (
 	"context"
 	"strings"
 
-	"github.com/estafette/estafette-ci-api/pkg/api"
-	"github.com/estafette/estafette-ci-api/pkg/services/estafette"
-	manifest "github.com/estafette/estafette-ci-manifest"
 	"github.com/nats-io/nats.go"
 	"github.com/opentracing/opentracing-go"
 	"github.com/rs/zerolog/log"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/api"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/services/estafette"
+	manifest "github.com/ziplineeci/ziplinee-ci-manifest"
 )
 
 //go:generate mockgen -package=queue -destination ./mock.go -source=service.go

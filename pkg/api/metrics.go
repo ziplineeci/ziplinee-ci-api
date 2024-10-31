@@ -3,10 +3,10 @@ package api
 import (
 	"time"
 
-	foundation "github.com/estafette/estafette-foundation"
 	"github.com/go-kit/kit/metrics"
 	kitprometheus "github.com/go-kit/kit/metrics/prometheus"
 	stdprometheus "github.com/prometheus/client_golang/prometheus"
+	foundation "github.com/ziplineeci/ziplinee-foundation"
 )
 
 func UpdateMetrics(requestCount metrics.Counter, requestLatency metrics.Histogram, funcName string, begin time.Time) {

@@ -7,9 +7,9 @@ import (
 	"time"
 
 	stdpubsub "cloud.google.com/go/pubsub"
-	"github.com/estafette/estafette-ci-api/pkg/api"
-	manifest "github.com/estafette/estafette-ci-manifest"
 	"github.com/rs/zerolog/log"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/api"
+	manifest "github.com/ziplineeci/ziplinee-ci-manifest"
 )
 
 // Client is the interface for communicating with the pubsub apis

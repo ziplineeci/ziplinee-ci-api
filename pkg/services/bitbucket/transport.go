@@ -9,12 +9,12 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/estafette/estafette-ci-api/pkg/api"
-	"github.com/estafette/estafette-ci-api/pkg/clients/bitbucketapi"
-	manifest "github.com/estafette/estafette-ci-manifest"
 	"github.com/gin-gonic/gin"
 	"github.com/opentracing/opentracing-go"
 	"github.com/rs/zerolog/log"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/api"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/clients/bitbucketapi"
+	manifest "github.com/ziplineeci/ziplinee-ci-manifest"
 )
 
 func NewHandler(service Service, config *api.APIConfig, bitbucketapiClient bitbucketapi.Client) Handler {

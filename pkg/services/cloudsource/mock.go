@@ -8,8 +8,8 @@ import (
 	context "context"
 	reflect "reflect"
 
-	cloudsourceapi "github.com/estafette/estafette-ci-api/pkg/clients/cloudsourceapi"
-	contracts "github.com/estafette/estafette-ci-contracts"
+	cloudsourceapi "github.com/ziplineeci/ziplinee-ci-api/pkg/clients/cloudsourceapi"
+	contracts "github.com/ziplineeci/ziplinee-ci-contracts"
 	gomock "github.com/golang/mock/gomock"
 )
 

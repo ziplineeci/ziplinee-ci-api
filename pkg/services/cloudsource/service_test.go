@@ -7,15 +7,15 @@ import (
 	"testing"
 	"time"
 
-	"github.com/estafette/estafette-ci-api/pkg/api"
-	"github.com/estafette/estafette-ci-api/pkg/clients/cloudsourceapi"
-	"github.com/estafette/estafette-ci-api/pkg/clients/pubsubapi"
-	"github.com/estafette/estafette-ci-api/pkg/services/estafette"
-	"github.com/estafette/estafette-ci-api/pkg/services/queue"
-	contracts "github.com/estafette/estafette-ci-contracts"
-	manifest "github.com/estafette/estafette-ci-manifest"
 	gomock "github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/assert"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/api"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/clients/cloudsourceapi"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/clients/pubsubapi"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/services/estafette"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/services/queue"
+	contracts "github.com/ziplineeci/ziplinee-ci-contracts"
+	manifest "github.com/ziplineeci/ziplinee-ci-manifest"
 )
 
 func TestCreateJobForCloudSourcePush(t *testing.T) {

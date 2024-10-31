@@ -3,9 +3,9 @@ package rbac
 import (
 	"context"
 
-	"github.com/estafette/estafette-ci-api/pkg/api"
-	contracts "github.com/estafette/estafette-ci-contracts"
 	"github.com/opentracing/opentracing-go"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/api"
+	contracts "github.com/ziplineeci/ziplinee-ci-contracts"
 )
 
 // NewTracingService returns a new instance of a tracing Service.

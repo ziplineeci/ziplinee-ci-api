@@ -3,10 +3,10 @@ package pubsub
 import (
 	"net/http"
 
-	"github.com/estafette/estafette-ci-api/pkg/clients/pubsubapi"
-	"github.com/estafette/estafette-ci-api/pkg/services/estafette"
 	"github.com/gin-gonic/gin"
 	"github.com/rs/zerolog/log"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/clients/pubsubapi"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/services/estafette"
 )
 
 // NewHandler returns a pubsub.Handler

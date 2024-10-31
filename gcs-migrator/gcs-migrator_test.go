@@ -28,7 +28,7 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/metadata"
 
-	"github.com/estafette/estafette-ci-api/pkg/migrationpb"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/migrationpb"
 )
 
 const objectsInBucket = "objects.txt"

@@ -6,7 +6,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/estafette/estafette-ci-api/pkg/api"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/api"
 	"golang.org/x/oauth2"
 	"google.golang.org/api/sourcerepo/v1"
 	"gopkg.in/src-d/go-git.v4"

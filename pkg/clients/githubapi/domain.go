@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	contracts "github.com/estafette/estafette-ci-contracts"
+	contracts "github.com/ziplineeci/ziplinee-ci-contracts"
 )
 
 const repoSource = "github.com"

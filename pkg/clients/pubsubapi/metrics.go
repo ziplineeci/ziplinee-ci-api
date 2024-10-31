@@ -4,9 +4,9 @@ import (
 	"context"
 	"time"
 
-	"github.com/estafette/estafette-ci-api/pkg/api"
-	manifest "github.com/estafette/estafette-ci-manifest"
 	"github.com/go-kit/kit/metrics"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/api"
+	manifest "github.com/ziplineeci/ziplinee-ci-manifest"
 )
 
 // NewMetricsClient returns a new instance of a metrics Client.

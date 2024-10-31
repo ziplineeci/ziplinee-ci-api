@@ -5,16 +5,16 @@ import (
 	"errors"
 	"strings"
 
-	contracts "github.com/estafette/estafette-ci-contracts"
-	manifest "github.com/estafette/estafette-ci-manifest"
 	"github.com/opentracing/opentracing-go"
 	"github.com/rs/zerolog/log"
+	contracts "github.com/ziplineeci/ziplinee-ci-contracts"
+	manifest "github.com/ziplineeci/ziplinee-ci-manifest"
 
-	"github.com/estafette/estafette-ci-api/pkg/api"
-	"github.com/estafette/estafette-ci-api/pkg/clients/bitbucketapi"
-	"github.com/estafette/estafette-ci-api/pkg/clients/pubsubapi"
-	"github.com/estafette/estafette-ci-api/pkg/services/estafette"
-	"github.com/estafette/estafette-ci-api/pkg/services/queue"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/api"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/clients/bitbucketapi"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/clients/pubsubapi"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/services/estafette"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/services/queue"
 )
 
 var (

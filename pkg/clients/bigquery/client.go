@@ -6,8 +6,8 @@ import (
 	"time"
 
 	"cloud.google.com/go/bigquery"
-	"github.com/estafette/estafette-ci-api/pkg/api"
 	"github.com/rs/zerolog/log"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/api"
 )
 
 // Client is the interface for connecting to bigquery

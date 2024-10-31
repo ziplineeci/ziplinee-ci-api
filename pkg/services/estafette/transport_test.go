@@ -3,7 +3,6 @@ package estafette
 import (
 	"context"
 	"encoding/json"
-	"github.com/estafette/estafette-ci-api/pkg/migrationpb"
 	"io"
 	"net/http"
 	"net/http/httptest"
@@ -12,18 +11,20 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/migrationpb"
+
 	sq "github.com/Masterminds/squirrel"
-	"github.com/appleboy/gin-jwt/v2"
-	"github.com/estafette/estafette-ci-api/pkg/api"
-	"github.com/estafette/estafette-ci-api/pkg/clients/builderapi"
-	"github.com/estafette/estafette-ci-api/pkg/clients/cloudstorage"
-	"github.com/estafette/estafette-ci-api/pkg/clients/database"
-	contracts "github.com/estafette/estafette-ci-contracts"
-	crypt "github.com/estafette/estafette-ci-crypt"
-	manifest "github.com/estafette/estafette-ci-manifest"
+	jwt "github.com/appleboy/gin-jwt/v2"
 	"github.com/gin-gonic/gin"
 	"github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/assert"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/api"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/clients/builderapi"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/clients/cloudstorage"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/clients/database"
+	contracts "github.com/ziplineeci/ziplinee-ci-contracts"
+	crypt "github.com/ziplineeci/ziplinee-ci-crypt"
+	manifest "github.com/ziplineeci/ziplinee-ci-manifest"
 )
 
 func TestMarshal(t *testing.T) {

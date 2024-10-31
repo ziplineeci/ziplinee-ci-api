@@ -8,7 +8,7 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 
-	"github.com/estafette/estafette-ci-api/pkg/migrationpb"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/migrationpb"
 )
 
 func TestHealthCheckResponse(t *testing.T) {

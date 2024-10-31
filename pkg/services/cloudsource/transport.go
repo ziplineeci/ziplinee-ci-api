@@ -5,10 +5,10 @@ import (
 	"errors"
 	"net/http"
 
-	"github.com/estafette/estafette-ci-api/pkg/clients/cloudsourceapi"
-	"github.com/estafette/estafette-ci-api/pkg/clients/pubsubapi"
 	"github.com/gin-gonic/gin"
 	"github.com/rs/zerolog/log"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/clients/cloudsourceapi"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/clients/pubsubapi"
 )
 
 func NewHandler(pubsubapiClient pubsubapi.Client, service Service) Handler {

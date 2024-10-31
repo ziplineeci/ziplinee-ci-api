@@ -3,9 +3,9 @@ package builderapi
 import (
 	"fmt"
 
-	"github.com/estafette/estafette-ci-api/pkg/clients/database"
-	contracts "github.com/estafette/estafette-ci-contracts"
-	manifest "github.com/estafette/estafette-ci-manifest"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/clients/database"
+	contracts "github.com/ziplineeci/ziplinee-ci-contracts"
+	manifest "github.com/ziplineeci/ziplinee-ci-manifest"
 )
 
 // CiBuilderParams contains the parameters required to create a ci builder job

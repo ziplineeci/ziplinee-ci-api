@@ -6,15 +6,15 @@ import (
 	"sync"
 	"testing"
 
-	manifest "github.com/estafette/estafette-ci-manifest"
 	gomock "github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/assert"
+	manifest "github.com/ziplineeci/ziplinee-ci-manifest"
 
-	"github.com/estafette/estafette-ci-api/pkg/api"
-	"github.com/estafette/estafette-ci-api/pkg/clients/bitbucketapi"
-	"github.com/estafette/estafette-ci-api/pkg/clients/pubsubapi"
-	"github.com/estafette/estafette-ci-api/pkg/services/estafette"
-	"github.com/estafette/estafette-ci-api/pkg/services/queue"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/api"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/clients/bitbucketapi"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/clients/pubsubapi"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/services/estafette"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/services/queue"
 )
 
 func TestCreateJobForBitbucketPush(t *testing.T) {

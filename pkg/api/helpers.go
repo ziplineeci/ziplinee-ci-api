@@ -15,10 +15,10 @@ import (
 	"time"
 
 	jwt "github.com/appleboy/gin-jwt/v2"
-	contracts "github.com/estafette/estafette-ci-contracts"
 	"github.com/gin-gonic/gin"
 	jwtgo "github.com/golang-jwt/jwt/v4"
 	"github.com/sethgrid/pester"
+	contracts "github.com/ziplineeci/ziplinee-ci-contracts"
 )
 
 var (

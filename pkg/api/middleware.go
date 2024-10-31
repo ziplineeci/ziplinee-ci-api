@@ -7,9 +7,9 @@ import (
 	"time"
 
 	jwt "github.com/appleboy/gin-jwt/v2"
-	contracts "github.com/estafette/estafette-ci-contracts"
 	"github.com/gin-gonic/gin"
 	"github.com/rs/zerolog/log"
+	contracts "github.com/ziplineeci/ziplinee-ci-contracts"
 )
 
 // Middleware handles authentication for routes requiring authentication

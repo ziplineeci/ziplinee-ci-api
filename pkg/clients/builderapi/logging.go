@@ -3,8 +3,8 @@ package builderapi
 import (
 	"context"
 
-	"github.com/estafette/estafette-ci-api/pkg/api"
-	contracts "github.com/estafette/estafette-ci-contracts"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/api"
+	contracts "github.com/ziplineeci/ziplinee-ci-contracts"
 	batchv1 "k8s.io/api/batch/v1"
 )
 

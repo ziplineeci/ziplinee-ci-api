@@ -3,8 +3,8 @@ package prometheus
 import (
 	"context"
 
-	"github.com/estafette/estafette-ci-api/pkg/api"
 	"github.com/opentracing/opentracing-go"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/api"
 )
 
 // NewTracingClient returns a new instance of a tracing Client.

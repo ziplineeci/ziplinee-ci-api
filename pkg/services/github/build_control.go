@@ -1,7 +1,7 @@
 package github
 
 import (
-	"github.com/estafette/estafette-ci-api/pkg/clients/githubapi"
+	"github.com/ziplineeci/ziplinee-ci-api/pkg/clients/githubapi"
 )
 
 // isBuildBlocked check if repository is blocked from builds
