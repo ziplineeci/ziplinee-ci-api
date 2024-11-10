@@ -1,0 +1,6 @@
+auth:
+  jwt:
+    domain: ci.ziplinee.io
+
+jobs:
+  namespace: ziplinee-ci-jobs
