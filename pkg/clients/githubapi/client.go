@@ -33,18 +33,42 @@ var (
 //
 //go:generate mockgen -package=githubapi -destination ./mock.go -source=client.go
 type Client interface {
-	GetGithubAppToken(ctx context.Context, app GithubApp) (token string, err error)
-	GetAppAndInstallationByOwner(ctx context.Context, repoOwner string) (app *GithubApp, installation *GithubInstallation, err error)
+
+	// GetGithubAppToken returns a Github app token with which to retrieve an installation token
+	GetGithubAppToken(ctx context.Context, app GithubApp) (githubAppToken string, err error)
+	// GetAppAndInstallationByOwner retrieves a GitHub App and installation by the repository owner.
+	GetAppAndInstallationByOwner(context.Context, string) (*GithubApp, *GithubInstallation, error)
+	// GetAppAndInstallationByID retrieves a GitHub App and installation by the installation id.
 	GetAppAndInstallationByID(ctx context.Context, installationID int) (app *GithubApp, installation *GithubInstallation, err error)
+
+	// GetInstallationToken retrieves an installation token for the specified app and installation.
 	GetInstallationToken(ctx context.Context, app GithubApp, installation GithubInstallation) (accessToken AccessToken, err error)
-	GetEstafetteManifest(ctx context.Context, accesstoken AccessToken, event PushEvent) (valid bool, manifest string, err error)
-	JobVarsFunc(ctx context.Context) func(ctx context.Context, repoSource, repoOwner, repoName string) (token string, err error)
-	ConvertAppManifestCode(ctx context.Context, code string) (err error)
+
+	// GetZiplineeManifest retrieves the estafette manifest from the repository.
+	GetZiplineeManifest(ctx context.Context, accessToken AccessToken, event PushEvent) (valid bool, manifest string, err error)
+
+	// JobVarsFunc returns a function to retrieve a GitHub token based on the repository details.
+	JobVarsFunc(ctx context.Context) func(context.Context, string, string, string) (string, error)
+
+	// ConvertAppManifestCode  exchanges a temporary code for an app configuration.
+	ConvertAppManifestCode(ctx context.Context, code string) error
+
+	// GetApps retrieves all registered GitHub Apps.
 	GetApps(ctx context.Context) (apps []*GithubApp, err error)
+
+	// GetAppByID retrieves a GitHub App by its unique ID.
 	GetAppByID(ctx context.Context, id int) (app *GithubApp, err error)
+
+	// AddApp registers a new GitHub App.
 	AddApp(ctx context.Context, app GithubApp) (err error)
+
+	// RemoveApp deletes a registered GitHub App.
 	RemoveApp(ctx context.Context, app GithubApp) (err error)
+
+	// AddInstallation registers a new installation for a GitHub App.
 	AddInstallation(ctx context.Context, installation GithubInstallation) (err error)
+
+	// RemoveInstallation deletes an installation of a GitHub App.
 	RemoveInstallation(ctx context.Context, installation GithubInstallation) (err error)
 }
 
@@ -157,7 +181,7 @@ func (c *client) GetInstallationToken(ctx context.Context, app GithubApp, instal
 	return
 }
 
-func (c *client) GetEstafetteManifest(ctx context.Context, accessToken AccessToken, pushEvent PushEvent) (exists bool, manifest string, err error) {
+func (c *client) GetZiplineeManifest(ctx context.Context, accessToken AccessToken, pushEvent PushEvent) (exists bool, manifest string, err error) {
 
 	// https://developer.github.com/v3/repos/contents/
 

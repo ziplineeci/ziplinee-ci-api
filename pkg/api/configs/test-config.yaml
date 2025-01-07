@@ -44,13 +44,6 @@ integrations:
     bucket: my-bucket
     logsDir: logs
 
-  cloudsource:
-    enable: true
-    projectOrganizations:
-    - project: ziplinee
-      organizations:
-      - name: Ziplinee
-
 apiServer:
   baseURL: https://ci.ziplinee.io/
   integrationsURL: https://ci-integrations.ziplinee.io/

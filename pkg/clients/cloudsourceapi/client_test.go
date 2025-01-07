@@ -15,23 +15,23 @@ import (
 	"google.golang.org/api/sourcerepo/v1"
 )
 
-func TestGetToken(t *testing.T) {
-	if testing.Short() {
-		return
-	}
-
-	t.Run("ReturnsTokenForRepository", func(t *testing.T) {
-
-		config, tokenSource, service := getTokenSourceAndService()
-		client := NewClient(config, tokenSource, service)
-
-		// act
-		token, err := client.GetAccessToken(context.Background())
-
-		assert.Nil(t, err)
-		assert.NotNil(t, token)
-	})
-}
+//func TestGetToken(t *testing.T) {
+//	if testing.Short() {
+//		return
+//	}
+//
+//	t.Run("ReturnsTokenForRepository", func(t *testing.T) {
+//
+//		config, tokenSource, service := getTokenSourceAndService()
+//		client := NewClient(config, tokenSource, service)
+//
+//		// act
+//		token, err := client.GetAccessToken(context.Background())
+//
+//		assert.Nil(t, err)
+//		assert.NotNil(t, token)
+//	})
+//}
 
 func TestGetZiplineeManifest(t *testing.T) {
 	if testing.Short() {

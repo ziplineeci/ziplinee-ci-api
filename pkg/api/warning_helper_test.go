@@ -199,7 +199,7 @@ func TestGetManifestWarnings(t *testing.T) {
 
 		mft := &manifest.ZiplineeManifest{
 			GlobalEnvVars: map[string]string{
-				"my-secret": "ziplinee.secret(7pB-Znp16my5l-Gz.l--UakUaK5N8KYFt-sVNUaOY5uobSpWabJNVXYDEyDWT.hO6JcRARdtB-PY577NJeUrKMVOx-sjg617wTd8IkAh-PvIm9exuATeDeFiYaEr9eQtfreBQ=)",
+				"my-secret": "ziplinee.secret(L2m9KvoDWNU_roU_.ee2hTroyYK80o3j7BVZ9FQ==.UkHQ4itQXb5DiS7Rl_tz9WgUyIsllO6jmaplSkuIqmvE6kp5JSaS9rjKQvTvJyYqDmBcivU=)",
 			},
 		}
 		fullRepoPath := "github.com/ziplineeci/ziplinee-ci-api"
@@ -208,6 +208,9 @@ func TestGetManifestWarnings(t *testing.T) {
 		warnings, err := helper.GetManifestWarnings(mft, fullRepoPath)
 
 		assert.Nil(t, err)
+		for _, warning := range warnings {
+			t.Logf("Warning: %v", warning)
+		}
 		assert.Equal(t, 0, len(warnings))
 	})
 

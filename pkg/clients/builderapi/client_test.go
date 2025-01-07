@@ -21,7 +21,7 @@ func TestGetJobName(t *testing.T) {
 		jobName := ciBuilderClient.GetJobName(context.Background(), contracts.JobTypeBuild, "ziplinee", "ziplinee-ci-api", "390605593734184965")
 
 		assert.Equal(t, "build-ziplinee-ziplinee-ci-api-390605593734184965", jobName)
-		assert.Equal(t, 51, len(jobName))
+		assert.Equal(t, 49, len(jobName))
 	})
 
 	t.Run("ReturnsJobNameForBuildWithMaxLengthOf63Characters", func(t *testing.T) {
@@ -31,7 +31,7 @@ func TestGetJobName(t *testing.T) {
 		// act
 		jobName := ciBuilderClient.GetJobName(context.Background(), contracts.JobTypeBuild, "ziplinee", "ziplinee-extension-slack-build-status", "390605593734184965")
 
-		assert.Equal(t, "build-ziplinee-ziplinee-extension-slack-bu-390605593734184965", jobName)
+		assert.Equal(t, "build-ziplinee-ziplinee-extension-slack-buil-390605593734184965", jobName)
 		assert.Equal(t, 63, len(jobName))
 	})
 
@@ -43,7 +43,7 @@ func TestGetJobName(t *testing.T) {
 		jobName := ciBuilderClient.GetJobName(context.Background(), contracts.JobTypeRelease, "ziplinee", "ziplinee-ci-api", "390605593734184965")
 
 		assert.Equal(t, "release-ziplinee-ziplinee-ci-api-390605593734184965", jobName)
-		assert.Equal(t, 53, len(jobName))
+		assert.Equal(t, 51, len(jobName))
 	})
 
 	t.Run("ReturnsJobNameForReleaseWithMaxLengthOf63Characters", func(t *testing.T) {
@@ -53,7 +53,7 @@ func TestGetJobName(t *testing.T) {
 		// act
 		jobName := ciBuilderClient.GetJobName(context.Background(), contracts.JobTypeRelease, "ziplinee", "ziplinee-extension-slack-build-status", "390605593734184965")
 
-		assert.Equal(t, "release-ziplinee-ziplinee-extension-slack--390605593734184965", jobName)
+		assert.Equal(t, "release-ziplinee-ziplinee-extension-slack-bu-390605593734184965", jobName)
 		assert.Equal(t, 63, len(jobName))
 	})
 }
