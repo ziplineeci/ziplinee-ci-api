@@ -1,10 +1,10 @@
-# Estafette CI
+# Ziplinee CI
 
-The `ziplinee-ci-api` component is part of the Estafette CI system documented at https://ziplinee.io.
+The `ziplinee-ci-api` component is part of the Ziplinee CI system documented at https://ziplinee.io.
 
-Please file any issues related to Estafette CI at https://github.com/ziplineeci/ziplinee-ci-central/issues
+Please file any issues related to Ziplinee CI at https://github.com/ziplineeci/ziplinee-ci-central/issues
 
-## Estafette-ci-api
+## Ziplinee-ci-api
 
 This component handles all api calls for github, bitbucket and slack integrations; it serves api calls for the web frontend; and it creates build jobs in Kubernetes doing the hard work.
 
