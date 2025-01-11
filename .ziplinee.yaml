@@ -3,8 +3,8 @@ builder:
 
 labels:
   type: service
-  app-group: estafette-ci
-  team: estafette
+  app-group: zipline-ci
+  team: zipline-team
   language: golang
 
 version:
@@ -12,14 +12,6 @@ version:
     major: 1
     minor: 5
     patch: 5
-
-triggers:
-- name: migrator
-  pipeline:
-    name: github.com/estafette/estafette-ci-db-migrator
-    branch: main
-  builds:
-    branch: main
 
 stages:
   continues-integration:
@@ -34,13 +26,6 @@ stages:
           - golangci-lint run --timeout 3m
           - CGO_ENABLED=1 go test -short -race ./...
           - go build -ldflags "-X main.appgroup=${ESTAFETTE_LABEL_APP_GROUP} -X main.app=${ESTAFETTE_GIT_NAME} -X main.version=${ESTAFETTE_BUILD_VERSION} -X main.revision=${ESTAFETTE_GIT_REVISION} -X main.branch=${ESTAFETTE_GIT_BRANCH} -X main.buildDate=${ESTAFETTE_BUILD_DATETIME}" -o ./publish/${ESTAFETTE_GIT_NAME} .
-      gcs-migrator:
-        image: estafette/gcs-migrator-base
-        commands:
-          - cd gcs-migrator
-          - pyinstaller --strip -F -n gcs-migrator server.py
-          - mkdir -p ../publish
-          - staticx --strip dist/gcs-migrator ../publish/gcs-migrator
 
   integration-tests/db-migrator:
     services:
