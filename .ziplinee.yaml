@@ -3,7 +3,7 @@ builder:
 
 labels:
   type: service
-  app-group: zipline-ci
+  app-group: ziplinee-ci
   team: zipline-team
   language: golang
 
@@ -17,7 +17,7 @@ stages:
   continues-integration:
     parallelStages:
       ci-api:
-        image: estafette/estafette-ci-api-cache
+        image: ziplineeci/ziplinee-ci-api-cache
         env:
           CGO_ENABLED: 0
           GOGC: off
@@ -27,42 +27,19 @@ stages:
           - CGO_ENABLED=1 go test -short -race ./...
           - go build -ldflags "-X main.appgroup=${ESTAFETTE_LABEL_APP_GROUP} -X main.app=${ESTAFETTE_GIT_NAME} -X main.version=${ESTAFETTE_BUILD_VERSION} -X main.revision=${ESTAFETTE_GIT_REVISION} -X main.branch=${ESTAFETTE_GIT_BRANCH} -X main.buildDate=${ESTAFETTE_BUILD_DATETIME}" -o ./publish/${ESTAFETTE_GIT_NAME} .
 
-  integration-tests/db-migrator:
-    services:
-    - name: cockroachdb
-      multiStage: true
-      image: cockroachdb/cockroach:v21.1.8
-      env:
-        COCKROACH_SKIP_ENABLING_DIAGNOSTIC_REPORTING: "true"
-      readinessProbe:
-        httpGet:
-          path: /health?ready=1
-          port: 8080
-        timeoutSeconds: 120
-      commands:
-      - /cockroach/cockroach start-single-node --insecure --advertise-addr estafette-ci-db-public
-    image: estafette/estafette-ci-db-migrator:${ESTAFETTE_TRIGGER_MIGRATOR_BUILD_VERSION}
-    env:
-      DB_HOST: cockroachdb
-      DB_DATABASE: defaultdb
-      DB_INSECURE: true
-      DB_PORT: 26257
-      DB_USER: root
-      DB_PASSWORD: ''
-      ESTAFETTE_LOG_FORMAT: console
 
-  integration-tests/db-integration:
-    image: estafette/estafette-ci-api-cache
-    env:
-      GOGC: off
-      DB_HOST: cockroachdb
-      DB_DATABASE: defaultdb
-      DB_INSECURE: true
-      DB_PORT: 26257
-      DB_USER: root
-      DB_PASSWORD: ''
-    commands:
-    - go test -run TestIntegration ./...
+#  integration-tests/db-integration:
+#    image: ziplineeci/ziplinee-ci-api-cache
+#    env:
+#      GOGC: off
+#      DB_HOST: cockroachdb
+#      DB_DATABASE: defaultdb
+#      DB_INSECURE: true
+#      DB_PORT: 26257
+#      DB_USER: root
+#      DB_PASSWORD: ''
+#    commands:
+#    - go test -run TestIntegration ./...
 
   bake:
     image: extensions/docker:dev

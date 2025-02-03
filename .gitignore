@@ -19,3 +19,4 @@ gcs-migrator/dist
 gcs-migrator/build
 .go/
 .pyconfig/
+publish/
