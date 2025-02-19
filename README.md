@@ -1,6 +1,6 @@
 # Ziplinee CI
 
-The `ziplinee-ci-api` component is part of the Ziplinee CI system documented at https://ziplinee.io.
+The `ziplinee-ci-api` component is part of the Ziplinee CI system documented at https://ziplineeci.io.
 
 Please file any issues related to Ziplinee CI at https://github.com/ziplineeci/ziplinee-ci-central/issues
 
