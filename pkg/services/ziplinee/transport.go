@@ -35,7 +35,7 @@ import (
 )
 
 // NewHandler returns a new ziplinee.Handler
-func NewHandler(templatesPath string, config *api.APIConfig, encryptedConfig *api.APIConfig, databaseClient database.Client, cloudStorageClient cloudstorage.Client, ciBuilderClient builderapi.Client, buildService Service, warningHelper api.WarningHelper, secretHelper crypt.SecretHelper, gcsMigratorClient migrationpb.ServiceClient) Handler {
+func NewHandler(templatesPath string, config *api.APIConfig, encryptedConfig *api.APIConfig, databaseClient database.Client, cloudStorageClient cloudstorage.Client, ciBuilderClient builderapi.Client, buildService Service, warningHelper api.WarningHelper, secretHelper crypt.SecretHelper) Handler {
 	h := Handler{
 		templatesPath:      templatesPath,
 		config:             config,
@@ -46,8 +46,6 @@ func NewHandler(templatesPath string, config *api.APIConfig, encryptedConfig *ap
 		buildService:       buildService,
 		warningHelper:      warningHelper,
 		secretHelper:       secretHelper,
-		// !! Migration changes !!
-		gcsMigratorClient: gcsMigratorClient,
 	}
 	return h
 }

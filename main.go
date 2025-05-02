@@ -10,10 +10,6 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ziplineeci/ziplinee-ci-api/pkg/migrationpb"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials/insecure"
-
 	stdbigquery "cloud.google.com/go/bigquery"
 	stdpubsub "cloud.google.com/go/pubsub"
 	stdstorage "cloud.google.com/go/storage"
@@ -97,7 +93,6 @@ func main() {
 	if err != nil && !os.IsExist(err) {
 		log.Fatal().Err(err).Msg("failed creating /tmp directory")
 	}
-	startGcsMigrator()
 	closer := initJaeger()
 	defer closer.Close()
 
@@ -137,8 +132,7 @@ func initRequestHandlers(ctx context.Context, stopChannel <-chan struct{}, waitG
 	bqClient, pubsubClient, gcsClient, sourcerepoTokenSource, sourcerepoService := getGoogleCloudClients(ctx, config)
 	bigqueryClient, bitbucketapiClient, githubapiClient, slackapiClient, pubsubapiClient, databaseClient, dockerhubapiClient, builderapiClient, cloudstorageClient, prometheusClient, cloudsourceClient := getClients(ctx, config, encryptedConfig, secretHelper, bqClient, pubsubClient, gcsClient, sourcerepoTokenSource, sourcerepoService)
 	ziplineeService, queueService, rbacService, githubService, bitbucketService, cloudsourceService, catalogService := getServices(ctx, config, encryptedConfig, secretHelper, bigqueryClient, bitbucketapiClient, githubapiClient, slackapiClient, pubsubapiClient, databaseClient, dockerhubapiClient, builderapiClient, cloudstorageClient, prometheusClient, cloudsourceClient)
-	gcsMigratorHealthClient, gcsMigratorClient := getGcsMigratorClients()
-	bitbucketHandler, githubHandler, ziplineeHandler, rbacHandler, pubsubHandler, slackHandler, cloudsourceHandler, catalogHandler := getHandlers(ctx, config, encryptedConfig, secretHelper, bitbucketapiClient, githubapiClient, slackapiClient, pubsubapiClient, databaseClient, builderapiClient, cloudstorageClient, ziplineeService, rbacService, githubService, bitbucketService, cloudsourceService, catalogService, gcsMigratorClient)
+	bitbucketHandler, githubHandler, ziplineeHandler, rbacHandler, pubsubHandler, slackHandler, cloudsourceHandler, catalogHandler := getHandlers(ctx, config, encryptedConfig, secretHelper, bitbucketapiClient, githubapiClient, slackapiClient, pubsubapiClient, databaseClient, builderapiClient, cloudstorageClient, ziplineeService, rbacService, githubService, bitbucketService, cloudsourceService, catalogService)
 
 	waitGroup.Add(1)
 	//go ziplineeHandler.PollMigrationTasks(stopChannel, waitGroup.Done)
@@ -151,7 +145,7 @@ func initRequestHandlers(ctx context.Context, stopChannel <-chan struct{}, waitG
 		log.Fatal().Err(err).Msg("Failed initializing queue subscriptions")
 	}
 
-	srv := configureGinGonic(config, bitbucketHandler, githubHandler, ziplineeHandler, rbacHandler, pubsubHandler, slackHandler, cloudsourceHandler, catalogHandler, gcsMigratorHealthClient)
+	srv := configureGinGonic(config, bitbucketHandler, githubHandler, ziplineeHandler, rbacHandler, pubsubHandler, slackHandler, cloudsourceHandler, catalogHandler)
 
 	// watch for config changes
 	foundation.WatchForFileChanges(*configFilesPath, func(event fsnotify.Event) {
@@ -188,7 +182,6 @@ func initRequestHandlers(ctx context.Context, stopChannel <-chan struct{}, waitG
 	// watch for service account key file changes
 	foundation.WatchForFileChanges(os.Getenv("GOOGLE_APPLICATION_CREDENTIALS"), func(event fsnotify.Event) {
 		log.Info().Msg("Service account key file was updated, refreshing instances...")
-		startGcsMigrator()
 
 		// refresh google cloud clients
 		newBqClient, newPubsubClient, newGcsClient, newSourcerepoTokenSource, newSourcerepoService := getGoogleCloudClients(ctx, config)
@@ -213,18 +206,6 @@ func initRequestHandlers(ctx context.Context, stopChannel <-chan struct{}, waitG
 	}
 
 	return srv, queueService
-}
-
-// !! Migration changes !!
-func getGcsMigratorClients() (migrationpb.HealthClient, migrationpb.ServiceClient) {
-	opts := []grpc.DialOption{
-		grpc.WithTransportCredentials(insecure.NewCredentials()),
-	}
-	conn, err := grpc.Dial(*gcsMigratorServer, opts...)
-	if err != nil {
-		log.Fatal().Err(err).Msgf("failed to dial grpc connection with gcs-migrator: %v", err)
-	}
-	return migrationpb.NewHealthClient(conn), migrationpb.NewServiceClient(conn)
 }
 
 func getConfig(ctx context.Context) (*api.APIConfig, *api.APIConfig, crypt.SecretHelper) {
@@ -524,7 +505,7 @@ func getServices(ctx context.Context, config *api.APIConfig, encryptedConfig *ap
 	return
 }
 
-func getHandlers(_ context.Context, config *api.APIConfig, encryptedConfig *api.APIConfig, secretHelper crypt.SecretHelper, bitbucketapiClient bitbucketapi.Client, githubapiClient githubapi.Client, slackapiClient slackapi.Client, pubsubapiClient pubsubapi.Client, databaseClient database.Client, builderapiClient builderapi.Client, cloudstorageClient cloudstorage.Client, ziplineeService ziplinee.Service, rbacService rbac.Service, githubService github.Service, bitbucketService bitbucket.Service, cloudsourceService cloudsource.Service, catalogService catalog.Service, gcsMigratorClient migrationpb.ServiceClient) (
+func getHandlers(_ context.Context, config *api.APIConfig, encryptedConfig *api.APIConfig, secretHelper crypt.SecretHelper, bitbucketapiClient bitbucketapi.Client, githubapiClient githubapi.Client, slackapiClient slackapi.Client, pubsubapiClient pubsubapi.Client, databaseClient database.Client, builderapiClient builderapi.Client, cloudstorageClient cloudstorage.Client, ziplineeService ziplinee.Service, rbacService rbac.Service, githubService github.Service, bitbucketService bitbucket.Service, cloudsourceService cloudsource.Service, catalogService catalog.Service) (
 	bitbucketHandler bitbucket.Handler, githubHandler github.Handler, ziplineeHandler ziplinee.Handler, rbacHandler rbac.Handler, pubsubHandler pubsub.Handler, slackHandler slack.Handler, cloudsourceHandler cloudsource.Handler, catalogHandler catalog.Handler) {
 	log.Debug().Msg("Creating http handlers...")
 
@@ -533,7 +514,7 @@ func getHandlers(_ context.Context, config *api.APIConfig, encryptedConfig *api.
 	// transport
 	bitbucketHandler = bitbucket.NewHandler(bitbucketService, config, bitbucketapiClient)
 	githubHandler = github.NewHandler(githubService, config, githubapiClient, databaseClient)
-	ziplineeHandler = ziplinee.NewHandler(*templatesPath, config, encryptedConfig, databaseClient, cloudstorageClient, builderapiClient, ziplineeService, warningHelper, secretHelper, gcsMigratorClient)
+	ziplineeHandler = ziplinee.NewHandler(*templatesPath, config, encryptedConfig, databaseClient, cloudstorageClient, builderapiClient, ziplineeService, warningHelper, secretHelper)
 	rbacHandler = rbac.NewHandler(config, rbacService, databaseClient, bitbucketapiClient, githubapiClient)
 	pubsubHandler = pubsub.NewHandler(pubsubapiClient, ziplineeService)
 	slackHandler = slack.NewHandler(secretHelper, config, slackapiClient, databaseClient, ziplineeService)
@@ -543,7 +524,7 @@ func getHandlers(_ context.Context, config *api.APIConfig, encryptedConfig *api.
 	return
 }
 
-func configureGinGonic(config *api.APIConfig, bitbucketHandler bitbucket.Handler, githubHandler github.Handler, ziplineeHandler ziplinee.Handler, rbacHandler rbac.Handler, pubsubHandler pubsub.Handler, slackHandler slack.Handler, cloudsourceHandler cloudsource.Handler, catalogHandler catalog.Handler, gcsMigratorHealthClient migrationpb.HealthClient) *http.Server {
+func configureGinGonic(config *api.APIConfig, bitbucketHandler bitbucket.Handler, githubHandler github.Handler, ziplineeHandler ziplinee.Handler, rbacHandler rbac.Handler, pubsubHandler pubsub.Handler, slackHandler slack.Handler, cloudsourceHandler cloudsource.Handler, catalogHandler catalog.Handler) *http.Server {
 
 	// run gin in release mode and other defaults
 	gin.SetMode(gin.ReleaseMode)
@@ -805,18 +786,7 @@ func configureGinGonic(config *api.APIConfig, bitbucketHandler bitbucket.Handler
 		c.String(http.StatusOK, "I'm alive!")
 	})
 	routes.GET("/readiness", func(c *gin.Context) {
-		res, err := gcsMigratorHealthClient.Check(context.Background(), &migrationpb.HealthCheckRequest{})
-		if err != nil {
-			log.Warn().Err(err).Msg("error checking readiness of gcs-migrator")
-			c.String(http.StatusInternalServerError, "failed to check status of gcs-migrator")
-			return
-		}
-		if res.Status == migrationpb.HealthCheckResponse_SERVING {
-			c.String(http.StatusOK, "I'm ready!")
-			return
-		}
-		log.Warn().Int32("gcsMigratorStatus", int32(res.Status)).Err(err).Msg("error checking status of gcs-migrator")
-		c.String(http.StatusBadGateway, "invalid status from gcs-migrator")
+		c.String(http.StatusOK, "I'm ready!!")
 	})
 	router.NoRoute(func(c *gin.Context) {
 		c.JSON(http.StatusNotFound, gin.H{"code": http.StatusText(http.StatusNotFound), "message": "Page not found"})
@@ -863,27 +833,4 @@ func initJaeger() io.Closer {
 	}
 
 	return closer
-}
-
-// start gcs-migrator
-func startGcsMigrator() {
-	if gcsMigrator != nil {
-		if gcsMigratorStartedAt.Add(gcsMigratorRestartDelay).After(time.Now()) {
-			log.Debug().Msg("gcs-migrator was started less than a minutes ago, not restarting it")
-			return
-		}
-		log.Warn().Msg("Restarting gcs-migrator...")
-		err := gcsMigrator.Process.Kill()
-		if err != nil {
-			log.Error().Err(err).Msg("failed to stop gcs-migrator")
-		}
-	}
-	gcsMigrator = exec.Command("/gcs-migrator")
-	gcsMigrator.Stdout = os.Stdout
-	gcsMigrator.Stderr = os.Stderr
-	err := gcsMigrator.Start()
-	if err != nil {
-		log.Warn().Err(err).Msg("Starting gcs-migrator failed")
-	}
-	gcsMigratorStartedAt = time.Now()
 }
