@@ -3,8 +3,6 @@ package main
 import (
 	"testing"
 
-	"github.com/ziplineeci/ziplinee-ci-api/pkg/migrationpb"
-
 	"github.com/golang/mock/gomock"
 	"github.com/ziplineeci/ziplinee-ci-api/pkg/api"
 
@@ -62,8 +60,7 @@ func TestConfigureGinGonic(t *testing.T) {
 
 		bitbucketHandler := bitbucket.NewHandler(bitbucket.NewMockService(ctrl), config, bitbucketapiClient)
 		githubHandler := github.NewHandler(github.NewMockService(ctrl), config, githubapiClient, nil)
-		gcsMigratorClient := migrationpb.NewMockServiceClient(ctrl)
-		ziplineeHandler := ziplinee.NewHandler("", config, config, databaseClient, cloudstorageClient, builderapiClient, ziplineeService, warningHelper, secretHelper, gcsMigratorClient)
+		ziplineeHandler := ziplinee.NewHandler("", config, config, databaseClient, cloudstorageClient, builderapiClient, ziplineeService, warningHelper, secretHelper)
 
 		rbacHandler := rbac.NewHandler(config, rbac.NewMockService(ctrl), databaseClient, bitbucketapiClient, githubapiClient)
 		pubsubHandler := pubsub.NewHandler(pubsubapiclient, ziplineeService)
@@ -72,6 +69,6 @@ func TestConfigureGinGonic(t *testing.T) {
 		catalogHandler := catalog.NewHandler(config, catalog.NewMockService(ctrl), databaseClient)
 
 		// act
-		_ = configureGinGonic(config, bitbucketHandler, githubHandler, ziplineeHandler, rbacHandler, pubsubHandler, slackHandler, cloudsourceHandler, catalogHandler, nil)
+		_ = configureGinGonic(config, bitbucketHandler, githubHandler, ziplineeHandler, rbacHandler, pubsubHandler, slackHandler, cloudsourceHandler, catalogHandler)
 	})
 }

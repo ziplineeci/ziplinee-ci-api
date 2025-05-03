@@ -11,8 +11,6 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/ziplineeci/ziplinee-ci-api/pkg/migrationpb"
-
 	sq "github.com/Masterminds/squirrel"
 	jwt "github.com/appleboy/gin-jwt/v2"
 	"github.com/gin-gonic/gin"
@@ -115,8 +113,7 @@ func TestGetCatalogFilters(t *testing.T) {
 		secretHelper := crypt.NewSecretHelper("abc", false)
 		warningHelper := api.NewWarningHelper(secretHelper)
 
-		gcsMigratorClient := migrationpb.NewMockServiceClient(ctrl)
-		handler := NewHandler(templatesPath, cfg, encryptedConfig, databaseClient, cloudStorageClient, builderapiClient, buildService, warningHelper, secretHelper, gcsMigratorClient)
+		handler := NewHandler(templatesPath, cfg, encryptedConfig, databaseClient, cloudStorageClient, builderapiClient, buildService, warningHelper, secretHelper)
 		recorder := httptest.NewRecorder()
 		c, _ := gin.CreateTestContext(recorder)
 
@@ -176,8 +173,7 @@ func TestGetPipeline(t *testing.T) {
 		secretHelper := crypt.NewSecretHelper("abc", false)
 		warningHelper := api.NewWarningHelper(secretHelper)
 
-		gcsMigratorClient := migrationpb.NewMockServiceClient(ctrl)
-		handler := NewHandler(templatesPath, cfg, encryptedConfig, databaseClient, cloudStorageClient, builderapiClient, buildService, warningHelper, secretHelper, gcsMigratorClient)
+		handler := NewHandler(templatesPath, cfg, encryptedConfig, databaseClient, cloudStorageClient, builderapiClient, buildService, warningHelper, secretHelper)
 		recorder := httptest.NewRecorder()
 		c, _ := gin.CreateTestContext(recorder)
 		bodyReader := strings.NewReader("")
@@ -244,8 +240,7 @@ func TestGetManifestTemplates(t *testing.T) {
 		secretHelper := crypt.NewSecretHelper("abc", false)
 		warningHelper := api.NewWarningHelper(secretHelper)
 
-		gcsMigratorClient := migrationpb.NewMockServiceClient(ctrl)
-		handler := NewHandler(templatesPath, cfg, encryptedConfig, databaseClient, cloudStorageClient, builderapiClient, buildService, warningHelper, secretHelper, gcsMigratorClient)
+		handler := NewHandler(templatesPath, cfg, encryptedConfig, databaseClient, cloudStorageClient, builderapiClient, buildService, warningHelper, secretHelper)
 		recorder := httptest.NewRecorder()
 		c, _ := gin.CreateTestContext(recorder)
 		bodyReader := strings.NewReader("")
@@ -291,8 +286,7 @@ func TestGenerateManifest(t *testing.T) {
 		secretHelper := crypt.NewSecretHelper("abc", false)
 		warningHelper := api.NewWarningHelper(secretHelper)
 
-		gcsMigratorClient := migrationpb.NewMockServiceClient(ctrl)
-		handler := NewHandler(templatesPath, cfg, encryptedConfig, databaseClient, cloudStorageClient, builderapiClient, buildService, warningHelper, secretHelper, gcsMigratorClient)
+		handler := NewHandler(templatesPath, cfg, encryptedConfig, databaseClient, cloudStorageClient, builderapiClient, buildService, warningHelper, secretHelper)
 		recorder := httptest.NewRecorder()
 		c, _ := gin.CreateTestContext(recorder)
 		bodyReader := strings.NewReader("{\"template\": \"docker\", \"placeholders\": {\"TeamName\": \"ziplinee\"}}")
@@ -385,8 +379,7 @@ func TestCreatePipelineRelease_Forbidden(t *testing.T) {
 		secretHelper := crypt.NewSecretHelper("abc", false)
 		warningHelper := api.NewWarningHelper(secretHelper)
 
-		gcsMigratorClient := migrationpb.NewMockServiceClient(ctrl)
-		handler := NewHandler(templatesPath, cfg, encryptedConfig, databaseClient, cloudStorageClient, builderapiClient, buildService, warningHelper, secretHelper, gcsMigratorClient)
+		handler := NewHandler(templatesPath, cfg, encryptedConfig, databaseClient, cloudStorageClient, builderapiClient, buildService, warningHelper, secretHelper)
 		recorder := httptest.NewRecorder()
 		c, _ := gin.CreateTestContext(recorder)
 		c.Set("JWT_PAYLOAD", jwt.MapClaims{
