@@ -182,25 +182,25 @@ func TestReadConfigFromFiles(t *testing.T) {
 		assert.Equal(t, LogTargetDatabase, apiServerConfig.LogReader)
 
 		assert.Equal(t, "envvars", apiServerConfig.InjectStagesPerOperatingSystem[manifest.OperatingSystemLinux].Build.Before[0].Name)
-		assert.Equal(t, "extensions/envvars:stable", apiServerConfig.InjectStagesPerOperatingSystem[manifest.OperatingSystemLinux].Build.Before[0].ContainerImage)
+		assert.Equal(t, "extensionci/envvars:stable", apiServerConfig.InjectStagesPerOperatingSystem[manifest.OperatingSystemLinux].Build.Before[0].ContainerImage)
 
 		assert.Equal(t, "snyk", apiServerConfig.InjectStagesPerOperatingSystem[manifest.OperatingSystemLinux].Build.After[0].Name)
-		assert.Equal(t, "extensions/snyk:stable-golang", apiServerConfig.InjectStagesPerOperatingSystem[manifest.OperatingSystemLinux].Build.After[0].ContainerImage)
+		assert.Equal(t, "extensionci/snyk:stable-golang", apiServerConfig.InjectStagesPerOperatingSystem[manifest.OperatingSystemLinux].Build.After[0].ContainerImage)
 		assert.Equal(t, map[string]interface{}{
 			"language": "golang",
 		}, apiServerConfig.InjectStagesPerOperatingSystem[manifest.OperatingSystemLinux].Build.After[0].CustomProperties["labelSelector"])
 
 		assert.Equal(t, "envvars", apiServerConfig.InjectStagesPerOperatingSystem[manifest.OperatingSystemLinux].Release.After[0].Name)
-		assert.Equal(t, "extensions/envvars:dev", apiServerConfig.InjectStagesPerOperatingSystem[manifest.OperatingSystemLinux].Release.After[0].ContainerImage)
+		assert.Equal(t, "extensionci/envvars:dev", apiServerConfig.InjectStagesPerOperatingSystem[manifest.OperatingSystemLinux].Release.After[0].ContainerImage)
 		assert.Equal(t, "envvars", apiServerConfig.InjectStagesPerOperatingSystem[manifest.OperatingSystemLinux].Bot.After[0].Name)
-		assert.Equal(t, "extensions/envvars:dev", apiServerConfig.InjectStagesPerOperatingSystem[manifest.OperatingSystemLinux].Bot.After[0].ContainerImage)
+		assert.Equal(t, "extensionci/envvars:dev", apiServerConfig.InjectStagesPerOperatingSystem[manifest.OperatingSystemLinux].Bot.After[0].ContainerImage)
 
 		assert.Equal(t, "envvars", apiServerConfig.InjectStagesPerOperatingSystem[manifest.OperatingSystemWindows].Build.Before[0].Name)
-		assert.Equal(t, "extensions/envvars:windowsservercore-ltsc2019", apiServerConfig.InjectStagesPerOperatingSystem[manifest.OperatingSystemWindows].Build.Before[0].ContainerImage)
+		assert.Equal(t, "extensionci/envvars:windowsservercore-ltsc2019", apiServerConfig.InjectStagesPerOperatingSystem[manifest.OperatingSystemWindows].Build.Before[0].ContainerImage)
 		assert.Equal(t, "envvars", apiServerConfig.InjectStagesPerOperatingSystem[manifest.OperatingSystemWindows].Release.After[0].Name)
-		assert.Equal(t, "extensions/envvars:windowsservercore-ltsc2019", apiServerConfig.InjectStagesPerOperatingSystem[manifest.OperatingSystemWindows].Release.After[0].ContainerImage)
+		assert.Equal(t, "extensionci/envvars:windowsservercore-ltsc2019", apiServerConfig.InjectStagesPerOperatingSystem[manifest.OperatingSystemWindows].Release.After[0].ContainerImage)
 		assert.Equal(t, "envvars", apiServerConfig.InjectStagesPerOperatingSystem[manifest.OperatingSystemWindows].Bot.After[0].Name)
-		assert.Equal(t, "extensions/envvars:windowsservercore-ltsc2019", apiServerConfig.InjectStagesPerOperatingSystem[manifest.OperatingSystemWindows].Bot.After[0].ContainerImage)
+		assert.Equal(t, "extensionci/envvars:windowsservercore-ltsc2019", apiServerConfig.InjectStagesPerOperatingSystem[manifest.OperatingSystemWindows].Bot.After[0].ContainerImage)
 
 		assert.Equal(t, 0, len(apiServerConfig.InjectCommandsPerOperatingSystemAndShell[manifest.OperatingSystemLinux]["/bin/sh"].Before))
 		assert.Equal(t, 0, len(apiServerConfig.InjectCommandsPerOperatingSystemAndShell[manifest.OperatingSystemLinux]["/bin/sh"].After))
@@ -460,9 +460,9 @@ func TestReadConfigFromFiles(t *testing.T) {
 
 		assert.Nil(t, err)
 		assert.Equal(t, 9, len(credentialsConfig))
-		assert.Equal(t, "container-registry-extensions", credentialsConfig[0].Name)
+		assert.Equal(t, "container-registry-extensionci", credentialsConfig[0].Name)
 		assert.Equal(t, "container-registry", credentialsConfig[0].Type)
-		assert.Equal(t, "extensions", credentialsConfig[0].AdditionalProperties["repository"])
+		assert.Equal(t, "extensionci", credentialsConfig[0].AdditionalProperties["repository"])
 		assert.Equal(t, "slack-webhook-ziplinee", credentialsConfig[6].Name)
 		assert.Equal(t, "slack-webhook", credentialsConfig[6].Type)
 		assert.Equal(t, "ziplinee", credentialsConfig[6].AdditionalProperties["workspace"])
@@ -501,7 +501,7 @@ func TestReadConfigFromFiles(t *testing.T) {
 
 		assert.Nil(t, err)
 		assert.Equal(t, 8, len(trustedImagesConfig))
-		assert.Equal(t, "extensions/docker", trustedImagesConfig[0].ImagePath)
+		assert.Equal(t, "extensionci/docker", trustedImagesConfig[0].ImagePath)
 		assert.True(t, trustedImagesConfig[0].RunDocker)
 		assert.Equal(t, 1, len(trustedImagesConfig[0].InjectedCredentialTypes))
 		assert.Equal(t, "container-registry", trustedImagesConfig[0].InjectedCredentialTypes[0])

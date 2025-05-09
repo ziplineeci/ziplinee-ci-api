@@ -109,7 +109,7 @@ func TestInjectStages(t *testing.T) {
 			assert.Equal(t, 2, len(injectedManifest.Stages[0].ParallelStages))
 
 			assert.Equal(t, "git-clone", injectedManifest.Stages[0].ParallelStages[0].Name)
-			assert.Equal(t, "extensions/git-clone:beta", injectedManifest.Stages[0].ParallelStages[0].ContainerImage)
+			assert.Equal(t, "extensionci/git-clone:beta", injectedManifest.Stages[0].ParallelStages[0].ContainerImage)
 		}
 	})
 
@@ -130,7 +130,7 @@ func TestInjectStages(t *testing.T) {
 			assert.Equal(t, "set-pending-build-status", injectedManifest.Stages[0].ParallelStages[0].Name)
 
 			assert.Equal(t, "git-clone", injectedManifest.Stages[1].Name)
-			assert.Equal(t, "extensions/git-clone:stable", injectedManifest.Stages[1].ContainerImage)
+			assert.Equal(t, "extensionci/git-clone:stable", injectedManifest.Stages[1].ContainerImage)
 		}
 	})
 
@@ -150,7 +150,7 @@ func TestInjectStages(t *testing.T) {
 			assert.Equal(t, 2, len(injectedManifest.Stages[0].ParallelStages))
 
 			assert.Equal(t, "set-pending-build-status", injectedManifest.Stages[0].ParallelStages[1].Name)
-			assert.Equal(t, "extensions/github-status:beta", injectedManifest.Stages[0].ParallelStages[1].ContainerImage)
+			assert.Equal(t, "extensionci/github-status:beta", injectedManifest.Stages[0].ParallelStages[1].ContainerImage)
 			assert.Equal(t, "pending", injectedManifest.Stages[0].ParallelStages[1].CustomProperties["status"])
 		}
 	})
@@ -172,7 +172,7 @@ func TestInjectStages(t *testing.T) {
 			assert.Equal(t, "git-clone", injectedManifest.Stages[0].ParallelStages[0].Name)
 
 			assert.Equal(t, "set-pending-build-status", injectedManifest.Stages[1].Name)
-			assert.Equal(t, "extensions/github-status:stable", injectedManifest.Stages[1].ContainerImage)
+			assert.Equal(t, "extensionci/github-status:stable", injectedManifest.Stages[1].ContainerImage)
 			assert.Equal(t, "pending", injectedManifest.Stages[1].CustomProperties["status"])
 		}
 	})
@@ -252,7 +252,7 @@ func TestInjectStages(t *testing.T) {
 			assert.Equal(t, "injected-after-hardcoded", injectedManifest.Stages[2].Name)
 			assert.Equal(t, "status == 'succeeded' || status == 'failed'", injectedManifest.Stages[2].When)
 			assert.Equal(t, "set-build-status", injectedManifest.Stages[2].ParallelStages[0].Name)
-			assert.Equal(t, "extensions/github-status:beta", injectedManifest.Stages[2].ParallelStages[0].ContainerImage)
+			assert.Equal(t, "extensionci/github-status:beta", injectedManifest.Stages[2].ParallelStages[0].ContainerImage)
 		}
 	})
 
@@ -269,7 +269,7 @@ func TestInjectStages(t *testing.T) {
 		assert.Nil(t, err)
 		if assert.Equal(t, 4, len(injectedManifest.Stages)) {
 			assert.Equal(t, "set-build-status", injectedManifest.Stages[3].Name)
-			assert.Equal(t, "extensions/github-status:stable", injectedManifest.Stages[3].ContainerImage)
+			assert.Equal(t, "extensionci/github-status:stable", injectedManifest.Stages[3].ContainerImage)
 		}
 	})
 
@@ -287,7 +287,7 @@ func TestInjectStages(t *testing.T) {
 		if assert.Equal(t, 2, len(injectedManifest.Releases[1].Stages)) {
 			assert.Equal(t, "injected-before-hardcoded", injectedManifest.Releases[1].Stages[0].Name)
 			assert.Equal(t, "git-clone", injectedManifest.Releases[1].Stages[0].ParallelStages[0].Name)
-			assert.Equal(t, "extensions/git-clone:beta", injectedManifest.Releases[1].Stages[0].ParallelStages[0].ContainerImage)
+			assert.Equal(t, "extensionci/git-clone:beta", injectedManifest.Releases[1].Stages[0].ParallelStages[0].ContainerImage)
 		}
 	})
 
@@ -304,7 +304,7 @@ func TestInjectStages(t *testing.T) {
 		assert.Nil(t, err)
 		if assert.Equal(t, 1, len(injectedManifest.Releases[0].Stages)) {
 			assert.Equal(t, "deploy", injectedManifest.Releases[0].Stages[0].Name)
-			assert.Equal(t, "extensions/gke", injectedManifest.Releases[0].Stages[0].ContainerImage)
+			assert.Equal(t, "extensionci/gke", injectedManifest.Releases[0].Stages[0].ContainerImage)
 		}
 	})
 
@@ -321,7 +321,7 @@ func TestInjectStages(t *testing.T) {
 		assert.Nil(t, err)
 		if assert.Equal(t, 2, len(injectedManifest.Releases[0].Stages)) {
 			assert.Equal(t, "git-clone", injectedManifest.Releases[0].Stages[0].Name)
-			assert.Equal(t, "extensions/git-clone:stable", injectedManifest.Releases[0].Stages[0].ContainerImage)
+			assert.Equal(t, "extensionci/git-clone:stable", injectedManifest.Releases[0].Stages[0].ContainerImage)
 		}
 	})
 
@@ -358,7 +358,7 @@ func TestInjectStages(t *testing.T) {
 					Stages: []*manifest.ZiplineeStage{
 						{
 							Name:           "deploy",
-							ContainerImage: "extensions/gke",
+							ContainerImage: "extensionci/gke",
 						},
 					},
 				},
@@ -369,7 +369,7 @@ func TestInjectStages(t *testing.T) {
 					Stages: []*manifest.ZiplineeStage{
 						{
 							Name:           "bot",
-							ContainerImage: "extensions/bot",
+							ContainerImage: "extensionci/bot",
 						},
 					},
 				},
@@ -387,13 +387,13 @@ func TestInjectStages(t *testing.T) {
 							Before: []*manifest.ZiplineeStage{
 								{
 									Name:           "envvar-before",
-									ContainerImage: "extensions/envvars:stable",
+									ContainerImage: "extensionci/envvars:stable",
 								},
 							},
 							After: []*manifest.ZiplineeStage{
 								{
 									Name:           "envvar-after",
-									ContainerImage: "extensions/envvars:stable",
+									ContainerImage: "extensionci/envvars:stable",
 								},
 							},
 						},
@@ -401,13 +401,13 @@ func TestInjectStages(t *testing.T) {
 							Before: []*manifest.ZiplineeStage{
 								{
 									Name:           "envvar-before",
-									ContainerImage: "extensions/envvars:stable",
+									ContainerImage: "extensionci/envvars:stable",
 								},
 							},
 							After: []*manifest.ZiplineeStage{
 								{
 									Name:           "envvar-after",
-									ContainerImage: "extensions/envvars:stable",
+									ContainerImage: "extensionci/envvars:stable",
 								},
 							},
 						},
@@ -415,13 +415,13 @@ func TestInjectStages(t *testing.T) {
 							Before: []*manifest.ZiplineeStage{
 								{
 									Name:           "envvar-before",
-									ContainerImage: "extensions/envvars:stable",
+									ContainerImage: "extensionci/envvars:stable",
 								},
 							},
 							After: []*manifest.ZiplineeStage{
 								{
 									Name:           "envvar-after",
-									ContainerImage: "extensions/envvars:stable",
+									ContainerImage: "extensionci/envvars:stable",
 								},
 							},
 						},
@@ -438,37 +438,37 @@ func TestInjectStages(t *testing.T) {
 		assert.Equal(t, "injected-before-hardcoded", injectedManifest.Stages[0].Name)
 		assert.Equal(t, 1, len(injectedManifest.Stages[0].ParallelStages))
 		assert.Equal(t, "git-clone", injectedManifest.Stages[0].ParallelStages[0].Name)
-		assert.Equal(t, "extensions/git-clone:beta", injectedManifest.Stages[0].ParallelStages[0].ContainerImage)
+		assert.Equal(t, "extensionci/git-clone:beta", injectedManifest.Stages[0].ParallelStages[0].ContainerImage)
 
 		assert.Equal(t, "injected-before-configured", injectedManifest.Stages[1].Name)
 		assert.Equal(t, 1, len(injectedManifest.Stages[1].ParallelStages))
 		assert.Equal(t, "envvar-before", injectedManifest.Stages[1].ParallelStages[0].Name)
-		assert.Equal(t, "extensions/envvars:stable", injectedManifest.Stages[1].ParallelStages[0].ContainerImage)
+		assert.Equal(t, "extensionci/envvars:stable", injectedManifest.Stages[1].ParallelStages[0].ContainerImage)
 
 		assert.Equal(t, "injected-after-configured", injectedManifest.Stages[3].Name)
 		assert.Equal(t, 1, len(injectedManifest.Stages[3].ParallelStages))
 		assert.Equal(t, "envvar-after", injectedManifest.Stages[3].ParallelStages[0].Name)
-		assert.Equal(t, "extensions/envvars:stable", injectedManifest.Stages[3].ParallelStages[0].ContainerImage)
+		assert.Equal(t, "extensionci/envvars:stable", injectedManifest.Stages[3].ParallelStages[0].ContainerImage)
 
 		assert.Equal(t, 3, len(injectedManifest.Releases[0].Stages))
 		assert.Equal(t, "injected-before-configured", injectedManifest.Releases[0].Stages[0].Name)
 		assert.Equal(t, 1, len(injectedManifest.Releases[0].Stages[0].ParallelStages))
 		assert.Equal(t, "envvar-before", injectedManifest.Releases[0].Stages[0].ParallelStages[0].Name)
-		assert.Equal(t, "extensions/envvars:stable", injectedManifest.Releases[0].Stages[0].ParallelStages[0].ContainerImage)
+		assert.Equal(t, "extensionci/envvars:stable", injectedManifest.Releases[0].Stages[0].ParallelStages[0].ContainerImage)
 		assert.Equal(t, "injected-after-configured", injectedManifest.Releases[0].Stages[2].Name)
 		assert.Equal(t, 1, len(injectedManifest.Releases[0].Stages[2].ParallelStages))
 		assert.Equal(t, "envvar-after", injectedManifest.Releases[0].Stages[2].ParallelStages[0].Name)
-		assert.Equal(t, "extensions/envvars:stable", injectedManifest.Releases[0].Stages[2].ParallelStages[0].ContainerImage)
+		assert.Equal(t, "extensionci/envvars:stable", injectedManifest.Releases[0].Stages[2].ParallelStages[0].ContainerImage)
 
 		assert.Equal(t, 3, len(injectedManifest.Bots[0].Stages))
 		assert.Equal(t, "injected-before-configured", injectedManifest.Bots[0].Stages[0].Name)
 		assert.Equal(t, 1, len(injectedManifest.Bots[0].Stages[0].ParallelStages))
 		assert.Equal(t, "envvar-before", injectedManifest.Bots[0].Stages[0].ParallelStages[0].Name)
-		assert.Equal(t, "extensions/envvars:stable", injectedManifest.Bots[0].Stages[0].ParallelStages[0].ContainerImage)
+		assert.Equal(t, "extensionci/envvars:stable", injectedManifest.Bots[0].Stages[0].ParallelStages[0].ContainerImage)
 		assert.Equal(t, "injected-after-configured", injectedManifest.Bots[0].Stages[2].Name)
 		assert.Equal(t, 1, len(injectedManifest.Bots[0].Stages[2].ParallelStages))
 		assert.Equal(t, "envvar-after", injectedManifest.Bots[0].Stages[2].ParallelStages[0].Name)
-		assert.Equal(t, "extensions/envvars:stable", injectedManifest.Bots[0].Stages[2].ParallelStages[0].ContainerImage)
+		assert.Equal(t, "extensionci/envvars:stable", injectedManifest.Bots[0].Stages[2].ParallelStages[0].ContainerImage)
 	})
 
 	t.Run("InjectsConfiguredStagesIfDoesNotAlreadyExistsAndLabelsMatchLabelSelector", func(t *testing.T) {
@@ -490,7 +490,7 @@ func TestInjectStages(t *testing.T) {
 					Stages: []*manifest.ZiplineeStage{
 						{
 							Name:           "deploy",
-							ContainerImage: "extensions/gke",
+							ContainerImage: "extensionci/gke",
 						},
 					},
 				},
@@ -501,7 +501,7 @@ func TestInjectStages(t *testing.T) {
 					Stages: []*manifest.ZiplineeStage{
 						{
 							Name:           "bot",
-							ContainerImage: "extensions/bot",
+							ContainerImage: "extensionci/bot",
 						},
 					},
 				},
@@ -519,7 +519,7 @@ func TestInjectStages(t *testing.T) {
 							Before: []*manifest.ZiplineeStage{
 								{
 									Name:           "envvar-before",
-									ContainerImage: "extensions/envvars:stable",
+									ContainerImage: "extensionci/envvars:stable",
 									CustomProperties: map[string]interface{}{
 										"labelSelector": map[string]interface{}{
 											"language": "golang|node",
@@ -531,7 +531,7 @@ func TestInjectStages(t *testing.T) {
 							After: []*manifest.ZiplineeStage{
 								{
 									Name:           "envvar-after",
-									ContainerImage: "extensions/envvars:stable",
+									ContainerImage: "extensionci/envvars:stable",
 									CustomProperties: map[string]interface{}{
 										"labelSelector": map[string]interface{}{
 											"language": "golang|node",
@@ -545,7 +545,7 @@ func TestInjectStages(t *testing.T) {
 							Before: []*manifest.ZiplineeStage{
 								{
 									Name:           "envvar-before",
-									ContainerImage: "extensions/envvars:stable",
+									ContainerImage: "extensionci/envvars:stable",
 									CustomProperties: map[string]interface{}{
 										"labelSelector": map[string]interface{}{
 											"language": "golang|node",
@@ -557,7 +557,7 @@ func TestInjectStages(t *testing.T) {
 							After: []*manifest.ZiplineeStage{
 								{
 									Name:           "envvar-after",
-									ContainerImage: "extensions/envvars:stable",
+									ContainerImage: "extensionci/envvars:stable",
 									CustomProperties: map[string]interface{}{
 										"labelSelector": map[string]interface{}{
 											"language": "golang|node",
@@ -571,7 +571,7 @@ func TestInjectStages(t *testing.T) {
 							Before: []*manifest.ZiplineeStage{
 								{
 									Name:           "envvar-before",
-									ContainerImage: "extensions/envvars:stable",
+									ContainerImage: "extensionci/envvars:stable",
 									CustomProperties: map[string]interface{}{
 										"labelSelector": map[string]interface{}{
 											"language": "golang|node",
@@ -583,7 +583,7 @@ func TestInjectStages(t *testing.T) {
 							After: []*manifest.ZiplineeStage{
 								{
 									Name:           "envvar-after",
-									ContainerImage: "extensions/envvars:stable",
+									ContainerImage: "extensionci/envvars:stable",
 									CustomProperties: map[string]interface{}{
 										"labelSelector": map[string]interface{}{
 											"language": "golang|node",
@@ -607,37 +607,37 @@ func TestInjectStages(t *testing.T) {
 		assert.Equal(t, "injected-before-hardcoded", injectedManifest.Stages[0].Name)
 		assert.Equal(t, 1, len(injectedManifest.Stages[0].ParallelStages))
 		assert.Equal(t, "git-clone", injectedManifest.Stages[0].ParallelStages[0].Name)
-		assert.Equal(t, "extensions/git-clone:beta", injectedManifest.Stages[0].ParallelStages[0].ContainerImage)
+		assert.Equal(t, "extensionci/git-clone:beta", injectedManifest.Stages[0].ParallelStages[0].ContainerImage)
 
 		assert.Equal(t, "injected-before-configured", injectedManifest.Stages[1].Name)
 		assert.Equal(t, 1, len(injectedManifest.Stages[1].ParallelStages))
 		assert.Equal(t, "envvar-before", injectedManifest.Stages[1].ParallelStages[0].Name)
-		assert.Equal(t, "extensions/envvars:stable", injectedManifest.Stages[1].ParallelStages[0].ContainerImage)
+		assert.Equal(t, "extensionci/envvars:stable", injectedManifest.Stages[1].ParallelStages[0].ContainerImage)
 
 		assert.Equal(t, "injected-after-configured", injectedManifest.Stages[3].Name)
 		assert.Equal(t, 1, len(injectedManifest.Stages[3].ParallelStages))
 		assert.Equal(t, "envvar-after", injectedManifest.Stages[3].ParallelStages[0].Name)
-		assert.Equal(t, "extensions/envvars:stable", injectedManifest.Stages[3].ParallelStages[0].ContainerImage)
+		assert.Equal(t, "extensionci/envvars:stable", injectedManifest.Stages[3].ParallelStages[0].ContainerImage)
 
 		assert.Equal(t, 3, len(injectedManifest.Releases[0].Stages))
 		assert.Equal(t, "injected-before-configured", injectedManifest.Releases[0].Stages[0].Name)
 		assert.Equal(t, 1, len(injectedManifest.Releases[0].Stages[0].ParallelStages))
 		assert.Equal(t, "envvar-before", injectedManifest.Releases[0].Stages[0].ParallelStages[0].Name)
-		assert.Equal(t, "extensions/envvars:stable", injectedManifest.Releases[0].Stages[0].ParallelStages[0].ContainerImage)
+		assert.Equal(t, "extensionci/envvars:stable", injectedManifest.Releases[0].Stages[0].ParallelStages[0].ContainerImage)
 		assert.Equal(t, "injected-after-configured", injectedManifest.Releases[0].Stages[2].Name)
 		assert.Equal(t, 1, len(injectedManifest.Releases[0].Stages[2].ParallelStages))
 		assert.Equal(t, "envvar-after", injectedManifest.Releases[0].Stages[2].ParallelStages[0].Name)
-		assert.Equal(t, "extensions/envvars:stable", injectedManifest.Releases[0].Stages[2].ParallelStages[0].ContainerImage)
+		assert.Equal(t, "extensionci/envvars:stable", injectedManifest.Releases[0].Stages[2].ParallelStages[0].ContainerImage)
 
 		assert.Equal(t, 3, len(injectedManifest.Bots[0].Stages))
 		assert.Equal(t, "injected-before-configured", injectedManifest.Bots[0].Stages[0].Name)
 		assert.Equal(t, 1, len(injectedManifest.Bots[0].Stages[0].ParallelStages))
 		assert.Equal(t, "envvar-before", injectedManifest.Bots[0].Stages[0].ParallelStages[0].Name)
-		assert.Equal(t, "extensions/envvars:stable", injectedManifest.Bots[0].Stages[0].ParallelStages[0].ContainerImage)
+		assert.Equal(t, "extensionci/envvars:stable", injectedManifest.Bots[0].Stages[0].ParallelStages[0].ContainerImage)
 		assert.Equal(t, "injected-after-configured", injectedManifest.Bots[0].Stages[2].Name)
 		assert.Equal(t, 1, len(injectedManifest.Bots[0].Stages[2].ParallelStages))
 		assert.Equal(t, "envvar-after", injectedManifest.Bots[0].Stages[2].ParallelStages[0].Name)
-		assert.Equal(t, "extensions/envvars:stable", injectedManifest.Bots[0].Stages[2].ParallelStages[0].ContainerImage)
+		assert.Equal(t, "extensionci/envvars:stable", injectedManifest.Bots[0].Stages[2].ParallelStages[0].ContainerImage)
 	})
 
 	t.Run("DoesNotInjectConfiguredStagesIfAlreadyExists", func(t *testing.T) {
@@ -646,7 +646,7 @@ func TestInjectStages(t *testing.T) {
 			Stages: []*manifest.ZiplineeStage{
 				{
 					Name:           "envvar-before",
-					ContainerImage: "extensions/envvars:stable",
+					ContainerImage: "extensionci/envvars:stable",
 				},
 				{
 					Name:           "build",
@@ -654,7 +654,7 @@ func TestInjectStages(t *testing.T) {
 				},
 				{
 					Name:           "envvar-after",
-					ContainerImage: "extensions/envvars:stable",
+					ContainerImage: "extensionci/envvars:stable",
 				},
 			},
 			Releases: []*manifest.ZiplineeRelease{
@@ -663,15 +663,15 @@ func TestInjectStages(t *testing.T) {
 					Stages: []*manifest.ZiplineeStage{
 						{
 							Name:           "envvar-before",
-							ContainerImage: "extensions/envvars:stable",
+							ContainerImage: "extensionci/envvars:stable",
 						},
 						{
 							Name:           "deploy",
-							ContainerImage: "extensions/gke",
+							ContainerImage: "extensionci/gke",
 						},
 						{
 							Name:           "envvar-after",
-							ContainerImage: "extensions/envvars:stable",
+							ContainerImage: "extensionci/envvars:stable",
 						},
 					},
 				},
@@ -682,15 +682,15 @@ func TestInjectStages(t *testing.T) {
 					Stages: []*manifest.ZiplineeStage{
 						{
 							Name:           "envvar-before",
-							ContainerImage: "extensions/envvars:stable",
+							ContainerImage: "extensionci/envvars:stable",
 						},
 						{
 							Name:           "bot",
-							ContainerImage: "extensions/bot",
+							ContainerImage: "extensionci/bot",
 						},
 						{
 							Name:           "envvar-after",
-							ContainerImage: "extensions/envvars:stable",
+							ContainerImage: "extensionci/envvars:stable",
 						},
 					},
 				},
@@ -708,13 +708,13 @@ func TestInjectStages(t *testing.T) {
 							Before: []*manifest.ZiplineeStage{
 								{
 									Name:           "envvar-before",
-									ContainerImage: "extensions/envvars:stable",
+									ContainerImage: "extensionci/envvars:stable",
 								},
 							},
 							After: []*manifest.ZiplineeStage{
 								{
 									Name:           "envvar-after",
-									ContainerImage: "extensions/envvars:stable",
+									ContainerImage: "extensionci/envvars:stable",
 								},
 							},
 						},
@@ -722,13 +722,13 @@ func TestInjectStages(t *testing.T) {
 							Before: []*manifest.ZiplineeStage{
 								{
 									Name:           "envvar-before",
-									ContainerImage: "extensions/envvars:stable",
+									ContainerImage: "extensionci/envvars:stable",
 								},
 							},
 							After: []*manifest.ZiplineeStage{
 								{
 									Name:           "envvar-after",
-									ContainerImage: "extensions/envvars:stable",
+									ContainerImage: "extensionci/envvars:stable",
 								},
 							},
 						},
@@ -736,13 +736,13 @@ func TestInjectStages(t *testing.T) {
 							Before: []*manifest.ZiplineeStage{
 								{
 									Name:           "envvar-before",
-									ContainerImage: "extensions/envvars:stable",
+									ContainerImage: "extensionci/envvars:stable",
 								},
 							},
 							After: []*manifest.ZiplineeStage{
 								{
 									Name:           "envvar-after",
-									ContainerImage: "extensions/envvars:stable",
+									ContainerImage: "extensionci/envvars:stable",
 								},
 							},
 						},
@@ -759,21 +759,21 @@ func TestInjectStages(t *testing.T) {
 		assert.Equal(t, "injected-before-hardcoded", injectedManifest.Stages[0].Name)
 		assert.Equal(t, 1, len(injectedManifest.Stages[0].ParallelStages))
 		assert.Equal(t, "envvar-before", injectedManifest.Stages[1].Name)
-		assert.Equal(t, "extensions/envvars:stable", injectedManifest.Stages[1].ContainerImage)
+		assert.Equal(t, "extensionci/envvars:stable", injectedManifest.Stages[1].ContainerImage)
 		assert.Equal(t, "envvar-after", injectedManifest.Stages[3].Name)
-		assert.Equal(t, "extensions/envvars:stable", injectedManifest.Stages[3].ContainerImage)
+		assert.Equal(t, "extensionci/envvars:stable", injectedManifest.Stages[3].ContainerImage)
 
 		assert.Equal(t, 3, len(injectedManifest.Releases[0].Stages))
 		assert.Equal(t, "envvar-before", injectedManifest.Releases[0].Stages[0].Name)
-		assert.Equal(t, "extensions/envvars:stable", injectedManifest.Releases[0].Stages[0].ContainerImage)
+		assert.Equal(t, "extensionci/envvars:stable", injectedManifest.Releases[0].Stages[0].ContainerImage)
 		assert.Equal(t, "envvar-after", injectedManifest.Releases[0].Stages[2].Name)
-		assert.Equal(t, "extensions/envvars:stable", injectedManifest.Releases[0].Stages[2].ContainerImage)
+		assert.Equal(t, "extensionci/envvars:stable", injectedManifest.Releases[0].Stages[2].ContainerImage)
 
 		assert.Equal(t, 3, len(injectedManifest.Bots[0].Stages))
 		assert.Equal(t, "envvar-before", injectedManifest.Bots[0].Stages[0].Name)
-		assert.Equal(t, "extensions/envvars:stable", injectedManifest.Bots[0].Stages[0].ContainerImage)
+		assert.Equal(t, "extensionci/envvars:stable", injectedManifest.Bots[0].Stages[0].ContainerImage)
 		assert.Equal(t, "envvar-after", injectedManifest.Bots[0].Stages[2].Name)
-		assert.Equal(t, "extensions/envvars:stable", injectedManifest.Bots[0].Stages[2].ContainerImage)
+		assert.Equal(t, "extensionci/envvars:stable", injectedManifest.Bots[0].Stages[2].ContainerImage)
 	})
 
 	t.Run("DoesNotInjectConfiguredStagesIfLabelSelectorDoesNotMatch", func(t *testing.T) {
@@ -795,7 +795,7 @@ func TestInjectStages(t *testing.T) {
 					Stages: []*manifest.ZiplineeStage{
 						{
 							Name:           "deploy",
-							ContainerImage: "extensions/gke",
+							ContainerImage: "extensionci/gke",
 						},
 					},
 				},
@@ -806,7 +806,7 @@ func TestInjectStages(t *testing.T) {
 					Stages: []*manifest.ZiplineeStage{
 						{
 							Name:           "bot",
-							ContainerImage: "extensions/bot",
+							ContainerImage: "extensionci/bot",
 						},
 					},
 				},
@@ -824,7 +824,7 @@ func TestInjectStages(t *testing.T) {
 							Before: []*manifest.ZiplineeStage{
 								{
 									Name:           "envvar-before",
-									ContainerImage: "extensions/envvars:stable",
+									ContainerImage: "extensionci/envvars:stable",
 									CustomProperties: map[string]interface{}{
 										"labelSelector": map[string]interface{}{
 											"language": "golang|node",
@@ -836,7 +836,7 @@ func TestInjectStages(t *testing.T) {
 							After: []*manifest.ZiplineeStage{
 								{
 									Name:           "envvar-after",
-									ContainerImage: "extensions/envvars:stable",
+									ContainerImage: "extensionci/envvars:stable",
 									CustomProperties: map[string]interface{}{
 										"labelSelector": map[string]interface{}{
 											"language": "golang|node",
@@ -850,7 +850,7 @@ func TestInjectStages(t *testing.T) {
 							Before: []*manifest.ZiplineeStage{
 								{
 									Name:           "envvar-before",
-									ContainerImage: "extensions/envvars:stable",
+									ContainerImage: "extensionci/envvars:stable",
 									CustomProperties: map[string]interface{}{
 										"labelSelector": map[string]interface{}{
 											"language": "golang|node",
@@ -862,7 +862,7 @@ func TestInjectStages(t *testing.T) {
 							After: []*manifest.ZiplineeStage{
 								{
 									Name:           "envvar-after",
-									ContainerImage: "extensions/envvars:stable",
+									ContainerImage: "extensionci/envvars:stable",
 									CustomProperties: map[string]interface{}{
 										"labelSelector": map[string]interface{}{
 											"language": "golang|node",
@@ -876,7 +876,7 @@ func TestInjectStages(t *testing.T) {
 							Before: []*manifest.ZiplineeStage{
 								{
 									Name:           "envvar-before",
-									ContainerImage: "extensions/envvars:stable",
+									ContainerImage: "extensionci/envvars:stable",
 									CustomProperties: map[string]interface{}{
 										"labelSelector": map[string]interface{}{
 											"language": "golang|node",
@@ -888,7 +888,7 @@ func TestInjectStages(t *testing.T) {
 							After: []*manifest.ZiplineeStage{
 								{
 									Name:           "envvar-after",
-									ContainerImage: "extensions/envvars:stable",
+									ContainerImage: "extensionci/envvars:stable",
 									CustomProperties: map[string]interface{}{
 										"labelSelector": map[string]interface{}{
 											"language": "golang|node",
@@ -947,7 +947,7 @@ func getManifestWithoutBuildStatusSteps() manifest.ZiplineeManifest {
 				Stages: []*manifest.ZiplineeStage{
 					{
 						Name:           "deploy",
-						ContainerImage: "extensions/gke",
+						ContainerImage: "extensionci/gke",
 					},
 				},
 			},
@@ -957,7 +957,7 @@ func getManifestWithoutBuildStatusSteps() manifest.ZiplineeManifest {
 				Stages: []*manifest.ZiplineeStage{
 					{
 						Name:           "deploy",
-						ContainerImage: "extensions/gke",
+						ContainerImage: "extensionci/gke",
 						Shell:          "/bin/sh",
 						When:           "status == 'succeeded'",
 					},
@@ -990,7 +990,7 @@ func getManifestWithoutBuildStatusStepsAndWithGitClone() manifest.ZiplineeManife
 		Stages: []*manifest.ZiplineeStage{
 			{
 				Name:           "git-clone",
-				ContainerImage: "extensions/git-clone:stable",
+				ContainerImage: "extensionci/git-clone:stable",
 				Shell:          "/bin/sh",
 				When:           "status == 'succeeded'",
 			},
@@ -1007,7 +1007,7 @@ func getManifestWithoutBuildStatusStepsAndWithGitClone() manifest.ZiplineeManife
 				Stages: []*manifest.ZiplineeStage{
 					{
 						Name:           "deploy",
-						ContainerImage: "extensions/gke",
+						ContainerImage: "extensionci/gke",
 					},
 				},
 			},
@@ -1017,7 +1017,7 @@ func getManifestWithoutBuildStatusStepsAndWithGitClone() manifest.ZiplineeManife
 				Stages: []*manifest.ZiplineeStage{
 					{
 						Name:           "deploy",
-						ContainerImage: "extensions/gke",
+						ContainerImage: "extensionci/gke",
 						Shell:          "/bin/sh",
 						When:           "status == 'succeeded'",
 					},
@@ -1049,7 +1049,7 @@ func getManifestWithBuildStatusSteps() manifest.ZiplineeManifest {
 		Stages: []*manifest.ZiplineeStage{
 			{
 				Name:           "set-pending-build-status",
-				ContainerImage: "extensions/github-status:stable",
+				ContainerImage: "extensionci/github-status:stable",
 				CustomProperties: map[string]interface{}{
 					"status": "pending",
 				},
@@ -1066,7 +1066,7 @@ func getManifestWithBuildStatusSteps() manifest.ZiplineeManifest {
 			},
 			{
 				Name:             "set-build-status",
-				ContainerImage:   "extensions/github-status:stable",
+				ContainerImage:   "extensionci/github-status:stable",
 				Shell:            "/bin/sh",
 				WorkingDirectory: "/ziplinee-work",
 				When:             "status == 'succeeded' || status == 'failed'",
@@ -1079,13 +1079,13 @@ func getManifestWithBuildStatusSteps() manifest.ZiplineeManifest {
 				Stages: []*manifest.ZiplineeStage{
 					{
 						Name:           "git-clone",
-						ContainerImage: "extensions/git-clone:stable",
+						ContainerImage: "extensionci/git-clone:stable",
 						Shell:          "/bin/sh",
 						When:           "status == 'succeeded'",
 					},
 					{
 						Name:           "deploy",
-						ContainerImage: "extensions/gke",
+						ContainerImage: "extensionci/gke",
 						Shell:          "/bin/sh",
 						When:           "status == 'succeeded'",
 					},
@@ -1117,7 +1117,7 @@ func getManifestWithAllSteps() manifest.ZiplineeManifest {
 		Stages: []*manifest.ZiplineeStage{
 			{
 				Name:           "set-pending-build-status",
-				ContainerImage: "extensions/github-status:stable",
+				ContainerImage: "extensionci/github-status:stable",
 				CustomProperties: map[string]interface{}{
 					"status": "pending",
 				},
@@ -1127,13 +1127,13 @@ func getManifestWithAllSteps() manifest.ZiplineeManifest {
 			},
 			{
 				Name:           "git-clone",
-				ContainerImage: "extensions/git-clone:stable",
+				ContainerImage: "extensionci/git-clone:stable",
 				Shell:          "/bin/sh",
 				When:           "status == 'succeeded'",
 			},
 			{
 				Name:           "envvars",
-				ContainerImage: "extensions/envvars:stable",
+				ContainerImage: "extensionci/envvars:stable",
 				Shell:          "/bin/sh",
 				When:           "status == 'succeeded'",
 			},
@@ -1146,7 +1146,7 @@ func getManifestWithAllSteps() manifest.ZiplineeManifest {
 			},
 			{
 				Name:             "set-build-status",
-				ContainerImage:   "extensions/github-status:stable",
+				ContainerImage:   "extensionci/github-status:stable",
 				Shell:            "/bin/sh",
 				WorkingDirectory: "/ziplinee-work",
 				When:             "status == 'succeeded' || status == 'failed'",
@@ -1159,13 +1159,13 @@ func getManifestWithAllSteps() manifest.ZiplineeManifest {
 				Stages: []*manifest.ZiplineeStage{
 					{
 						Name:           "git-clone",
-						ContainerImage: "extensions/git-clone:stable",
+						ContainerImage: "extensionci/git-clone:stable",
 						Shell:          "/bin/sh",
 						When:           "status == 'succeeded'",
 					},
 					{
 						Name:           "deploy",
-						ContainerImage: "extensions/gke",
+						ContainerImage: "extensionci/gke",
 						Shell:          "/bin/sh",
 						When:           "status == 'succeeded'",
 					},
@@ -1212,7 +1212,7 @@ func getManifestWithoutInjectedStepsButWithInjectedBeforeStage() manifest.Ziplin
 				Stages: []*manifest.ZiplineeStage{
 					{
 						Name:           "deploy",
-						ContainerImage: "extensions/gke",
+						ContainerImage: "extensionci/gke",
 					},
 				},
 			},
@@ -1222,7 +1222,7 @@ func getManifestWithoutInjectedStepsButWithInjectedBeforeStage() manifest.Ziplin
 				Stages: []*manifest.ZiplineeStage{
 					{
 						Name:           "deploy",
-						ContainerImage: "extensions/gke",
+						ContainerImage: "extensionci/gke",
 						Shell:          "/bin/sh",
 						When:           "status == 'succeeded'",
 					},

@@ -71,7 +71,7 @@ func TestCreateBuild(t *testing.T) {
 			RepoOwner:  "ziplineeci",
 			RepoName:   "ziplinee-ci-api",
 			RepoBranch: "master",
-			Manifest:   "builder:\n  track: dev\nstages:\n  stage-1:\n    image: extensions/doesnothing:dev",
+			Manifest:   "builder:\n  track: dev\nstages:\n  stage-1:\n    image: extensionci/doesnothing:dev",
 		}
 
 		// act
@@ -171,7 +171,7 @@ func TestCreateBuild(t *testing.T) {
 			RepoOwner:  "ziplineeci",
 			RepoName:   "ziplinee-ci-api",
 			RepoBranch: "master",
-			Manifest:   "builder:\n  track: dev\nstages:\n  stage-1:\n    image: extensions/doesnothing:dev",
+			Manifest:   "builder:\n  track: dev\nstages:\n  stage-1:\n    image: extensionci/doesnothing:dev",
 		}
 
 		// act
@@ -219,7 +219,7 @@ func TestCreateBuild(t *testing.T) {
 			RepoOwner:  "ziplineeci",
 			RepoName:   "ziplinee-ci-api",
 			RepoBranch: "master",
-			Manifest:   "builder:\n  track: dev\nstages:\n  stage-1:\n    image: extensions/doesnothing:dev",
+			Manifest:   "builder:\n  track: dev\nstages:\n  stage-1:\n    image: extensionci/doesnothing:dev",
 		}
 
 		// act
@@ -276,7 +276,7 @@ func TestCreateBuild(t *testing.T) {
 			RepoOwner:  "ziplineeci",
 			RepoName:   "ziplinee-ci-api",
 			RepoBranch: "master",
-			Manifest:   "builder:\n  track: dev\nstages:\n  stage-1:\n    image: extensions/doesnothing:dev",
+			Manifest:   "builder:\n  track: dev\nstages:\n  stage-1:\n    image: extensionci/doesnothing:dev",
 		}
 
 		// act
@@ -472,7 +472,7 @@ func TestCreateBuild(t *testing.T) {
 			RepoOwner:  "ziplineeci",
 			RepoName:   "ziplinee-ci-api",
 			RepoBranch: "master",
-			Manifest:   "builder:\n  track: dev\nstages:\n  stage-1:\n    image: extensions/doesnothing:dev",
+			Manifest:   "builder:\n  track: dev\nstages:\n  stage-1:\n    image: extensionci/doesnothing:dev",
 		}
 
 		// act

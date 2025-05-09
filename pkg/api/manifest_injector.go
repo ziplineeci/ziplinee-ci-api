@@ -119,13 +119,13 @@ func injectBuildStagesBefore(config *APIConfig, operatingSystem manifest.Operati
 
 	hardInjectedStage.ParallelStages = injectIfNotExists(mft, stages, hardInjectedStage.ParallelStages, &manifest.ZiplineeStage{
 		Name:           "git-clone",
-		ContainerImage: fmt.Sprintf("extensions/git-clone:%v", builderTrack),
+		ContainerImage: fmt.Sprintf("extensionci/git-clone:%v", builderTrack),
 	})
 
 	if supportsBuildStatus {
 		hardInjectedStage.ParallelStages = injectIfNotExists(mft, stages, hardInjectedStage.ParallelStages, &manifest.ZiplineeStage{
 			Name:           "set-pending-build-status",
-			ContainerImage: fmt.Sprintf("extensions/%v-status:%v", gitSource, builderTrack),
+			ContainerImage: fmt.Sprintf("extensionci/%v-status:%v", gitSource, builderTrack),
 			CustomProperties: map[string]interface{}{
 				"status": "pending",
 			},
@@ -178,7 +178,7 @@ func injectBuildStagesAfter(config *APIConfig, operatingSystem manifest.Operatin
 	if supportsBuildStatus {
 		hardInjectedStage.ParallelStages = injectIfNotExists(mft, stages, hardInjectedStage.ParallelStages, &manifest.ZiplineeStage{
 			Name:           "set-build-status",
-			ContainerImage: fmt.Sprintf("extensions/%v-status:%v", gitSource, builderTrack),
+			ContainerImage: fmt.Sprintf("extensionci/%v-status:%v", gitSource, builderTrack),
 			When:           "status == 'succeeded' || status == 'failed'",
 		})
 	}
@@ -226,7 +226,7 @@ func injectReleaseStagesBefore(config *APIConfig, operatingSystem manifest.Opera
 	if release.CloneRepository != nil && *release.CloneRepository {
 		hardInjectedStage.ParallelStages = injectIfNotExists(mft, stages, hardInjectedStage.ParallelStages, &manifest.ZiplineeStage{
 			Name:           "git-clone",
-			ContainerImage: fmt.Sprintf("extensions/git-clone:%v", builderTrack),
+			ContainerImage: fmt.Sprintf("extensionci/git-clone:%v", builderTrack),
 		})
 	}
 
@@ -301,7 +301,7 @@ func injectBotStagesBefore(config *APIConfig, operatingSystem manifest.Operating
 	if bot.CloneRepository != nil && *bot.CloneRepository {
 		hardInjectedStage.ParallelStages = injectIfNotExists(mft, stages, hardInjectedStage.ParallelStages, &manifest.ZiplineeStage{
 			Name:           "git-clone",
-			ContainerImage: fmt.Sprintf("extensions/git-clone:%v", builderTrack),
+			ContainerImage: fmt.Sprintf("extensionci/git-clone:%v", builderTrack),
 		})
 	}
 

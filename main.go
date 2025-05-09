@@ -540,7 +540,7 @@ func configureGinGonic(config *api.APIConfig, bitbucketHandler bitbucket.Handler
 	// log panic as error so it gets shipped
 	router.Use(gin.CustomRecovery(func(c *gin.Context, recovered interface{}) {
 		if err, ok := recovered.(string); ok {
-			log.Error().Err(fmt.Errorf(err)).Msg("Recovered from panic")
+			log.Error().Err(fmt.Errorf("panic: %s", err)).Msg("Recovered from panic")
 		} else {
 			log.Error().Interface("recovered", recovered).Msg("Recovered from panic without error")
 		}

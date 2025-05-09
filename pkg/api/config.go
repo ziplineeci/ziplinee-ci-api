@@ -98,7 +98,7 @@ func (c *APIConfig) SetDefaults() {
 
 	if !c.ClearDefaultTrustedImages {
 		c.appendTrustedImageIfNotExists(&contracts.TrustedImageConfig{
-			ImagePath: "extensions/git-clone",
+			ImagePath: "extensionci/git-clone",
 			InjectedCredentialTypes: []string{
 				"bitbucket-api-token",
 				"github-api-token",
@@ -106,25 +106,25 @@ func (c *APIConfig) SetDefaults() {
 			},
 		})
 		c.appendTrustedImageIfNotExists(&contracts.TrustedImageConfig{
-			ImagePath: "extensions/github-status",
+			ImagePath: "extensionci/github-status",
 			InjectedCredentialTypes: []string{
 				"github-api-token",
 			},
 		})
 		c.appendTrustedImageIfNotExists(&contracts.TrustedImageConfig{
-			ImagePath: "extensions/github-release",
+			ImagePath: "extensionci/github-release",
 			InjectedCredentialTypes: []string{
 				"github-api-token",
 			},
 		})
 		c.appendTrustedImageIfNotExists(&contracts.TrustedImageConfig{
-			ImagePath: "extensions/bitbucket-status",
+			ImagePath: "extensionci/bitbucket-status",
 			InjectedCredentialTypes: []string{
 				"bitbucket-api-token",
 			},
 		})
 		c.appendTrustedImageIfNotExists(&contracts.TrustedImageConfig{
-			ImagePath:          "extensions/docker",
+			ImagePath:          "extensionci/docker",
 			RunDocker:          true,
 			AllowNotifications: true,
 			InjectedCredentialTypes: []string{
@@ -133,19 +133,19 @@ func (c *APIConfig) SetDefaults() {
 			},
 		})
 		c.appendTrustedImageIfNotExists(&contracts.TrustedImageConfig{
-			ImagePath: "extensions/gke",
+			ImagePath: "extensionci/gke",
 			InjectedCredentialTypes: []string{
 				"kubernetes-engine",
 			},
 		})
 		c.appendTrustedImageIfNotExists(&contracts.TrustedImageConfig{
-			ImagePath: "extensions/helm",
+			ImagePath: "extensionci/helm",
 			InjectedCredentialTypes: []string{
 				"kubernetes-engine",
 			},
 		})
 		c.appendTrustedImageIfNotExists(&contracts.TrustedImageConfig{
-			ImagePath: "extensions/cloud-function",
+			ImagePath: "extensionci/cloud-function",
 			InjectedCredentialTypes: []string{
 				"kubernetes-engine",
 			},

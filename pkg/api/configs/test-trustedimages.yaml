@@ -1,22 +1,22 @@
 clearDefaultTrustedImages: true
 trustedImages:
-- path: extensions/docker
+- path: extensionci/docker
   runDocker: true
   injectedCredentialTypes:
   - container-registry
-- path: extensions/gke
+- path: extensionci/gke
   injectedCredentialTypes:
   - kubernetes-engine
-- path: extensions/bitbucket-status
+- path: extensionci/bitbucket-status
   injectedCredentialTypes:
   - bitbucket-api-token
-- path: extensions/github-status
+- path: extensionci/github-status
   injectedCredentialTypes:
   - github-api-token
-- path: extensions/slack-build-status
+- path: extensionci/slack-build-status
   injectedCredentialTypes:
   - slack-webhook
-- path: extensions/dotnet
+- path: extensionci/dotnet
   injectedCredentialTypes:
   - nuget-server
   - sonarqube-server

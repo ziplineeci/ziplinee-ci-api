@@ -42,7 +42,7 @@ stages:
 #    - go test -run TestIntegration ./...
 
   bake:
-    image: extensions/docker:dev
+    image: extensionci/docker:dev
     action: build
     severity: unknown
     repositories:
@@ -52,7 +52,7 @@ stages:
     - /etc/ssl/certs/ca-certificates.crt
 
   push-to-docker-hub:
-    image: extensions/docker:dev
+    image: extensionci/docker:dev
     action: push
     repositories:
     - ziplineeci
@@ -66,7 +66,7 @@ stages:
       branch == 'main'
 
   slack-notify:
-    image: extensions/slack-build-status:dev
+    image: extensionci/slack-build-status:dev
     workspace: ziplineeci
     channels:
     - '#build-status'

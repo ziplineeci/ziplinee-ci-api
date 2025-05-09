@@ -57,38 +57,38 @@ apiServer:
       build:
         before:
         - name: envvars
-          image: extensions/envvars:stable
+          image: extensionci/envvars:stable
         after:
         - name: snyk
-          image: extensions/snyk:stable-golang
+          image: extensionci/snyk:stable-golang
           labelSelector:
             language: golang
       release:
         before: []
         after:
         - name: envvars
-          image: extensions/envvars:dev
+          image: extensionci/envvars:dev
       bot:
         before: []
         after:
         - name: envvars
-          image: extensions/envvars:dev
+          image: extensionci/envvars:dev
     windows:
       build:
         before:
         - name: envvars
-          image: extensions/envvars:windowsservercore-ltsc2019
+          image: extensionci/envvars:windowsservercore-ltsc2019
         after: []
       release:
         before: []
         after:
         - name: envvars
-          image: extensions/envvars:windowsservercore-ltsc2019
+          image: extensionci/envvars:windowsservercore-ltsc2019
       bot:
         before: []
         after:
         - name: envvars
-          image: extensions/envvars:windowsservercore-ltsc2019
+          image: extensionci/envvars:windowsservercore-ltsc2019
   injectCommandsPerOperatingSystemAndShell:
     linux:
       /bin/sh:

@@ -106,6 +106,7 @@ func (s *service) ReceiveGitEvent(gitEvent *manifest.ZiplineeGitEvent) {
 	span, ctx := opentracing.StartSpanFromContext(ctx, api.GetSpanName("queue", "ReceiveGitEvent"))
 	defer func() { api.FinishSpanWithError(span, err) }()
 
+	log.Debug().Msgf("Received git event: %v", gitEvent)
 	err = s.ziplineeService.FireGitTriggers(ctx, *gitEvent)
 	if err != nil {
 		log.Error().Err(err).Msgf("Failed handling git event from queue")

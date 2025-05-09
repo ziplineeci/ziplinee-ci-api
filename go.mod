@@ -1,6 +1,6 @@
 module github.com/ziplineeci/ziplinee-ci-api
 
-go 1.22.2
+go 1.24
 
 require (
 	cloud.google.com/go/bigquery v1.57.1
@@ -30,7 +30,7 @@ require (
 	github.com/uber/jaeger-client-go v2.30.0+incompatible
 	github.com/uber/jaeger-lib v2.4.1+incompatible
 	github.com/ziplineeci/ziplinee-ci-contracts v0.0.2
-	github.com/ziplineeci/ziplinee-ci-crypt v0.0.2
+	github.com/ziplineeci/ziplinee-ci-crypt v0.0.3
 	github.com/ziplineeci/ziplinee-ci-manifest v0.0.2
 	github.com/ziplineeci/ziplinee-foundation v0.0.1
 	golang.org/x/oauth2 v0.21.0

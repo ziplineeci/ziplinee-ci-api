@@ -48,7 +48,7 @@ func (w *warningHelperImpl) GetManifestWarnings(manifest *manifest.ZiplineeManif
 						if containerImageTag == "latest" {
 							stagesUsingLatestTag = append(stagesUsingLatestTag, ns.Name)
 						}
-						if containerImageTag == "dev" && containerImageRepo == "extensions" && !isZiplineePipeline {
+						if containerImageTag == "dev" && containerImageRepo == "extensionci" && !isZiplineePipeline {
 							stagesUsingDevTag = append(stagesUsingDevTag, ns.Name)
 						}
 					}
@@ -58,7 +58,7 @@ func (w *warningHelperImpl) GetManifestWarnings(manifest *manifest.ZiplineeManif
 				if containerImageTag == "latest" {
 					stagesUsingLatestTag = append(stagesUsingLatestTag, s.Name)
 				}
-				if containerImageTag == "dev" && containerImageRepo == "extensions" && !isZiplineePipeline {
+				if containerImageTag == "dev" && containerImageRepo == "extensionci" && !isZiplineePipeline {
 					stagesUsingDevTag = append(stagesUsingDevTag, s.Name)
 				}
 			}
@@ -73,7 +73,7 @@ func (w *warningHelperImpl) GetManifestWarnings(manifest *manifest.ZiplineeManif
 							if containerImageTag == "latest" {
 								stagesUsingLatestTag = append(stagesUsingLatestTag, ns.Name)
 							}
-							if containerImageTag == "dev" && containerImageRepo == "extensions" && !isZiplineePipeline {
+							if containerImageTag == "dev" && containerImageRepo == "extensionci" && !isZiplineePipeline {
 								stagesUsingDevTag = append(stagesUsingDevTag, ns.Name)
 							}
 						}
@@ -83,7 +83,7 @@ func (w *warningHelperImpl) GetManifestWarnings(manifest *manifest.ZiplineeManif
 					if containerImageTag == "latest" {
 						stagesUsingLatestTag = append(stagesUsingLatestTag, fmt.Sprintf("%v/%v", r.Name, s.Name))
 					}
-					if containerImageTag == "dev" && containerImageRepo == "extensions" && !isZiplineePipeline {
+					if containerImageTag == "dev" && containerImageRepo == "extensionci" && !isZiplineePipeline {
 						stagesUsingDevTag = append(stagesUsingDevTag, s.Name)
 					}
 				}

@@ -106,7 +106,7 @@ func TestGetManifestWarnings(t *testing.T) {
 			Stages: []*manifest.ZiplineeStage{
 				&manifest.ZiplineeStage{
 					Name:           "build",
-					ContainerImage: "extensions/docker:dev",
+					ContainerImage: "extensionci/docker:dev",
 				},
 			},
 		}
@@ -146,7 +146,7 @@ func TestGetManifestWarnings(t *testing.T) {
 			Stages: []*manifest.ZiplineeStage{
 				&manifest.ZiplineeStage{
 					Name:           "build",
-					ContainerImage: "extensions/docker:dev",
+					ContainerImage: "extensionci/docker:dev",
 				},
 			},
 		}

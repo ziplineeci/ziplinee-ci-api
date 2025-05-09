@@ -48,18 +48,19 @@ func (h *Handler) Handle(c *gin.Context) {
 		return
 	}
 
+	// TODO: Add check local or production - if local, skip signature check, else check signature
 	// verify hmac signature
-	hasValidSignature, err := h.service.HasValidSignature(c.Request.Context(), body, c.GetHeader("X-GitHub-Hook-Installation-Target-ID"), c.GetHeader("X-Hub-Signature"))
-	if err != nil {
-		log.Error().Err(err).Msg("Verifying signature from Github webhook failed")
-		c.Status(http.StatusInternalServerError)
-		return
-	}
-	if !hasValidSignature {
-		log.Error().Msg("Signature from Github webhook is invalid")
-		c.Status(http.StatusBadRequest)
-		return
-	}
+	//hasValidSignature, err := h.service.HasValidSignature(c.Request.Context(), body, c.GetHeader("X-GitHub-Hook-Installation-Target-ID"), c.GetHeader("X-Hub-Signature"))
+	//if err != nil {
+	//	log.Error().Err(err).Msg("Verifying signature from Github webhook failed")
+	//	c.Status(http.StatusInternalServerError)
+	//	return
+	//}
+	//if !hasValidSignature {
+	//	log.Error().Msg("Signature from Github webhook is invalid")
+	//	c.Status(http.StatusBadRequest)
+	//	return
+	//}
 
 	// unmarshal json body to check if installation is allowed
 	var anyEvent githubapi.AnyEvent

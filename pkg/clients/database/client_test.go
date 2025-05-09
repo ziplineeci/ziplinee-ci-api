@@ -3704,7 +3704,7 @@ func getNotification() contracts.NotificationRecord {
 			Version:  "1.0.0-main-1759",
 			Status:   contracts.StatusSucceeded,
 		},
-		Source: "extensions/docker",
+		Source: "extensionci/docker",
 		Notifications: []contracts.Notification{
 			{
 				Type:    contracts.NotificationTypeVulnerability,

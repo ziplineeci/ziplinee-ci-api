@@ -44,7 +44,7 @@ type Client interface {
 	// GetInstallationToken retrieves an installation token for the specified app and installation.
 	GetInstallationToken(ctx context.Context, app GithubApp, installation GithubInstallation) (accessToken AccessToken, err error)
 
-	// GetZiplineeManifest retrieves the estafette manifest from the repository.
+	// GetZiplineeManifest retrieves the ziplinee manifest from the repository.
 	GetZiplineeManifest(ctx context.Context, accessToken AccessToken, event PushEvent) (valid bool, manifest string, err error)
 
 	// JobVarsFunc returns a function to retrieve a GitHub token based on the repository details.
@@ -95,6 +95,7 @@ func (c *client) GetGithubAppToken(ctx context.Context, app GithubApp) (githubAp
 	// https://developer.github.com/apps/building-integrations/setting-up-and-registering-github-apps/about-authentication-options-for-github-apps/
 
 	// load private key from pem file
+	log.Debug().Msgf("Loading private key from github app config %v", app.PrivateKey)
 	privateKey, err := jwt.ParseRSAPrivateKeyFromPEM([]byte(app.PrivateKey))
 	if err != nil {
 		return
@@ -149,6 +150,7 @@ func (c *client) GetAppAndInstallationByID(ctx context.Context, installationID i
 	}
 
 	for _, a := range apps {
+		log.Debug().Msgf("Github app %v has %v private key", a.Name, a.PrivateKey)
 		for _, i := range a.Installations {
 			if i.ID == installationID {
 				return a, i, nil
@@ -185,7 +187,7 @@ func (c *client) GetZiplineeManifest(ctx context.Context, accessToken AccessToke
 
 	// https://developer.github.com/v3/repos/contents/
 
-	manifestSourceAPIUrl := fmt.Sprintf("https://api.github.com/repos/%v/contents/.estafette.yaml?ref=%v", pushEvent.Repository.FullName, pushEvent.After)
+	manifestSourceAPIUrl := fmt.Sprintf("https://api.github.com/repos/%v/contents/.ziplinee.yaml?ref=%v", pushEvent.Repository.FullName, pushEvent.After)
 	statusCode, body, err := c.callGithubAPI(ctx, "GET", manifestSourceAPIUrl, nil, "token", accessToken.Token)
 	if err != nil {
 		return
@@ -196,7 +198,7 @@ func (c *client) GetZiplineeManifest(ctx context.Context, accessToken AccessToke
 	}
 
 	if statusCode != http.StatusOK {
-		err = fmt.Errorf("Retrieving estafette manifest from %v failed with status code %v", manifestSourceAPIUrl, statusCode)
+		err = fmt.Errorf("Retrieving ziplinee manifest from %v failed with status code %v", manifestSourceAPIUrl, statusCode)
 		return
 	}
 
@@ -405,7 +407,7 @@ func (c *appsCacheItem) IsExpired() bool {
 var appsCache appsCacheItem
 var appsCacheMutex = sync.RWMutex{}
 
-const githubConfigmapName = "estafette-ci-api.github"
+const githubConfigmapName = "ziplinee-ci-api.github"
 
 func (c *client) GetApps(ctx context.Context) (apps []*GithubApp, err error) {
 
@@ -434,6 +436,7 @@ func (c *client) GetApps(ctx context.Context) (apps []*GithubApp, err error) {
 		if err != nil {
 			return
 		}
+		log.Debug().Msgf("log app private keys: %v", apps[0].PrivateKey)
 
 		// add to cache
 		appsCacheMutex.Lock()
@@ -662,23 +665,29 @@ func (c *client) getCurrentNamespace() string {
 
 func (c *client) encryptAppSecrets(ctx context.Context, apps []*GithubApp) (err error) {
 	for _, app := range apps {
-		encryptedPrivateKey, encryptErr := c.secretHelper.EncryptEnvelope(app.PrivateKey, crypt.DefaultPipelineAllowList)
-		if encryptErr != nil {
-			return encryptErr
+		if !c.secretHelper.IsEncryptedEnvelope(app.PrivateKey) {
+			encryptedPrivateKey, encryptErr := c.secretHelper.EncryptEnvelope(app.PrivateKey, crypt.DefaultPipelineAllowList)
+			if encryptErr != nil {
+				return encryptErr
+			}
+			app.PrivateKey = encryptedPrivateKey
 		}
-		app.PrivateKey = encryptedPrivateKey
 
-		encryptedWebhookSecret, encryptErr := c.secretHelper.EncryptEnvelope(app.WebhookSecret, crypt.DefaultPipelineAllowList)
-		if encryptErr != nil {
-			return encryptErr
+		if !c.secretHelper.IsEncryptedEnvelope(app.WebhookSecret) {
+			encryptedWebhookSecret, encryptErr := c.secretHelper.EncryptEnvelope(app.WebhookSecret, crypt.DefaultPipelineAllowList)
+			if encryptErr != nil {
+				return encryptErr
+			}
+			app.WebhookSecret = encryptedWebhookSecret
 		}
-		app.WebhookSecret = encryptedWebhookSecret
 
-		encryptedClientSecret, encryptErr := c.secretHelper.EncryptEnvelope(app.ClientSecret, crypt.DefaultPipelineAllowList)
-		if encryptErr != nil {
-			return encryptErr
+		if !c.secretHelper.IsEncryptedEnvelope(app.ClientSecret) {
+			encryptedClientSecret, encryptErr := c.secretHelper.EncryptEnvelope(app.ClientSecret, crypt.DefaultPipelineAllowList)
+			if encryptErr != nil {
+				return encryptErr
+			}
+			app.ClientSecret = encryptedClientSecret
 		}
-		app.ClientSecret = encryptedClientSecret
 	}
 
 	return nil
@@ -704,6 +713,5 @@ func (c *client) decryptAppSecrets(ctx context.Context, apps []*GithubApp) (err 
 		}
 		app.ClientSecret = decryptedClientSecret
 	}
-
 	return nil
 }
