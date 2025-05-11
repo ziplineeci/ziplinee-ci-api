@@ -32,7 +32,7 @@ require (
 	github.com/ziplineeci/ziplinee-ci-contracts v0.0.2
 	github.com/ziplineeci/ziplinee-ci-crypt v0.0.3
 	github.com/ziplineeci/ziplinee-ci-manifest v0.0.2
-	github.com/ziplineeci/ziplinee-foundation v0.0.1
+	github.com/ziplineeci/ziplinee-foundation v0.0.2
 	golang.org/x/oauth2 v0.21.0
 	golang.org/x/sync v0.7.0
 	golang.org/x/text v0.16.0
